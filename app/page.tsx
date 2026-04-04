@@ -19,8 +19,10 @@ export default function Home() {
 
         {/* Right half - containing the text */}
         <div className="w-full md:w-1/2 flex flex-col items-start justify-start pt-40 shrink-0 md:justify-center md:pt-8 p-8">
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 drop-shadow-2xl"><span className="text-yellow-500">Building</span> things, <span className="text-yellow-500">Observing</span> life, <span className="text-yellow-500">Documenting</span> it all<span className="text-yellow-500">!</span></h1>
-          <p className="text-xl md:text-2xl text-white drop-shadow-2xl">Software Engineer, Writer, and a forever Learner</p>
+          <div className="bg-black/40 md:bg-black/20 px-3 py-4 rounded-2xl">
+            <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 drop-shadow-2xl"><span className="text-yellow-500">Building</span> things, <span className="text-yellow-500">Observing</span> life, <span className="text-yellow-500">Documenting</span> it all<span className="text-yellow-500">!</span></h1>
+            <p className="text-lg md:text-xl text-white drop-shadow-2xl">Software Engineer, Writer, and a forever Learner</p>
+          </div>
         </div>
       </section>
       {/* about section */}

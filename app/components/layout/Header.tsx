@@ -40,7 +40,7 @@ export default function Header() {
 
                         {/* Dropdown Menu */}
                         <div className="absolute right-0 top-full pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 min-w-[120px]">
-                            <ul className="flex flex-col bg-black/70 backdrop-blur-md rounded-lg p-2 border border-white/20 shadow-xl">
+                            <ul className="flex flex-col bg-black/60 backdrop-blur-md rounded-lg p-2 border border-white/20 shadow-xl">
                                 <li>
                                     <Link href="/books" className="block px-4 py-2 hover:bg-white/20 rounded-md transition-colors whitespace-nowrap">
                                         Books
