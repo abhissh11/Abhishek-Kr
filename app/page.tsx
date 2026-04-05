@@ -6,6 +6,26 @@ import { IoLogoLinkedin } from "react-icons/io";
 import { IoLogoMedium, IoMail } from "react-icons/io5";
 import { LuArrowUpRight } from "react-icons/lu";
 import ExperienceCard from "./components/experience/ExperienceCard";
+import { Marquee } from "@/components/ui/marquee";
+import { skills } from "@/lib/data";
+import { TbBrandCss3, TbBrandGithubCopilot, TbBrandVscode } from "react-icons/tb";
+import { FaAws } from "react-icons/fa";
+import { VscMcp } from "react-icons/vsc";
+import {
+  SiJavascript, SiTypescript, SiPython, SiHtml5,
+  SiNextdotjs, SiExpress, SiFastapi, SiTailwindcss, SiShadcnui,
+  SiMongodb, SiPostgresql, SiPrisma, SiMysql, SiRedis,
+  SiGithubactions
+} from "react-icons/si";
+import { FaReact, FaNodeJs, FaDocker, FaGitAlt } from "react-icons/fa";
+import { BsDatabase } from "react-icons/bs";
+
+const iconMap: Record<string, any> = {
+  SiJavascript, SiTypescript, SiPython, SiHtml5, TbBrandCss3, BsDatabase,
+  FaReact, SiNextdotjs, FaNodeJs, SiExpress, SiFastapi, SiTailwindcss, SiShadcnui,
+  SiMongodb, SiPostgresql, SiPrisma, SiMysql, SiRedis,
+  FaDocker, FaAws, FaGitAlt, SiGithubactions, TbBrandGithubCopilot, VscMcp, TbBrandVscode
+};
 
 export default function Home() {
   return (
@@ -30,11 +50,24 @@ export default function Home() {
         <h1 className="text-xl font-serif md:text-3xl font-bold text-white mb-4 drop-shadow-2xl">About</h1>
         <div className="flex flex-col items-start justify-center max-w-[100%] bg-white/10 p-4 rounded-2xl">
           <p className="text-md md:text-lg flex gap-2 text-white drop-shadow-2xl"><span><LuArrowUpRight size={24} className="text-yellow-500" /></span>
-            I’m a builder who’s still figuring things out, but doing it by creating along the way. I enjoy working at the intersection of AI and real world impact, whether it’s building systems, experimenting with LLMs, or turning ideas into something real.</p>
-          <p className="text-md md:text-lg flex gap-2 text-white drop-shadow-2xl mt-4"><span><LuArrowUpRight size={24} className="text-yellow-500" /></span> At my core, I’m curious, not just about technology, but about how it shapes the way people think, act, and grow. That curiosity pushes me beyond just coding, into exploring meaning and purpose.</p>
-          <p className="text-md md:text-lg flex gap-2 text-white drop-shadow-2xl mt-4"><span><LuArrowUpRight size={24} className="text-yellow-500" /></span>I don’t see growth as just skills or achievements, but as becoming more aware, disciplined, and aligned with what I’m doing, and that’s something I’m continuously working on.</p>
+            I build systems that don’t just work, but scale - turning ideas into real products, from social platforms to practical tools, while constantly refining my craft.</p>
+          <p className="text-md md:text-lg flex gap-2 text-white drop-shadow-2xl mt-4"><span><LuArrowUpRight size={24} className="text-yellow-500" /></span> At my core, I’m driven by curiosity—not only about technology, but about its influence on how people think, behave, and evolve. That curiosity takes me beyond writing code, pushing me to explore deeper meaning and purpose.</p>
+          <p className="text-md md:text-lg flex gap-2 text-white drop-shadow-2xl mt-4"><span><LuArrowUpRight size={24} className="text-yellow-500" /></span>I view growth not just as collecting skills or achievements, but as becoming more self-aware, disciplined, and intentional in what I pursue—something I’m consistently working to improve</p>
         </div>
-        <div className="flex flex-wrap gap-5 bg-white/10 my-4 rounded-2xl justify-center items-center py-3 px-6 hover:scale-105 transition-all duration-300">
+        {/* Skills marquee  */}
+        <div className="w-full overflow-hidden mt-8 mb-4 max-w-full">
+          <Marquee pauseOnHover className="[--duration:45s]">
+            {skills.map((skill, i) => {
+              const Icon = iconMap[skill.icon];
+              return (
+                <div key={i} className="flex items-center gap-2 bg-white/10 px-6 py-2 rounded-2xl text-white hover:scale-105 transition-all duration-300">
+                  {Icon && <Icon size={24} />}
+                  <span className="text-lg font-medium">{skill.name}</span>
+                </div>
+              );
+            })}
+          </Marquee>
+        </div>        <div className="flex flex-wrap gap-5 bg-white/10 my-4 rounded-2xl justify-center items-center py-3 px-6 hover:scale-105 transition-all duration-300">
           <Link href="https://linkedin.com/in/abhishekkr-dev" target="_blank" className="flex items-center gap-2 text-white drop-shadow-2xl"><IoLogoLinkedin size={24} /> Linkedin</Link>
           <Link href="https://github.com/abhissh11" target="_blank" className="flex items-center gap-2 text-white drop-shadow-2xl"><FaGithub size={24} /> Github</Link>
           <Link href="https://medium.com/@dev.abhishekkr" target="_blank" className="flex items-center gap-2 text-white drop-shadow-2xl"><IoLogoMedium size={24} /> Medium</Link>

@@ -1,12 +1,16 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { IBM_Plex_Sans_Condensed, Geist_Mono, Geist } from "next/font/google";
 import "./globals.css";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
+import { cn } from "@/lib/utils";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
+
+const ibmPlexSansCondensed = IBM_Plex_Sans_Condensed({
+  variable: "--font-ibm-plex-sans-condensed",
   subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700"],
 });
 
 const geistMono = Geist_Mono({
@@ -27,7 +31,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={cn("h-full", "antialiased", ibmPlexSansCondensed.variable, geistMono.variable, "font-sans", geist.variable)}
     >
       <body className="min-h-full flex flex-col">
         <>
