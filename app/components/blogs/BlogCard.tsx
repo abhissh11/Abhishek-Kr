@@ -7,12 +7,12 @@ import { IoMdTime } from "react-icons/io";
 export default function BlogCard({ title, content, image, link, category }: { title: string, content: string, image: string, link: string, category: string }) {
     return (
         <>
-            <Link href={link}>
-                <div className="border-b border-zinc-700 flex flex-col md:flex-row gap-4 rounded-lg p-4 hover:bg-zinc-800 transition-all duration-300 cursor-pointer">
-                    <div className="">
-                        <Image src={image ? image : "/images/work.jpg"} alt={title} width={500} height={500} className="w-full h-48 object-cover rounded-lg" />
+            <Link href={link} target="_blank">
+                <div className="border-b border-zinc-700 flex flex-col md:flex-row gap-6 rounded-lg p-4 hover:bg-zinc-800 transition-all duration-300 cursor-pointer overflow-hidden">
+                    <div className="w-full md:w-72 shrink-0">
+                        <Image src={image ? image : "/images/work.jpg"} alt={title} width={500} height={500} className="w-full h-40 md:h-48 object-cover rounded-lg" />
                     </div>
-                    <div className="flex flex-col gap-2">
+                    <div className="flex flex-col gap-2 flex-1 pt-1">
                         <div className="flex flex-col gap-1">
                             <h2 className="text-xl font-bold text-white mb-2">{title}</h2>
                             <p className="text-zinc-300 mb-4">{content}</p>

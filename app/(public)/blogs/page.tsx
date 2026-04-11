@@ -9,7 +9,7 @@ export default function page() {
             title: "Calqus - EdTech Platform",
             description: "Calqus is an EdTech platform that provides online courses and educational resources to students along with AI-powered tools to enhance their learning experience.",
             image: "/images/work.jpg",
-            link: "https://calqus.in",
+            link: "https://calqus.com",
             category: "Technology"
         },
         {
