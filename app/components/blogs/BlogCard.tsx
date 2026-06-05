@@ -8,7 +8,7 @@ export default function BlogCard({ title, content, image, link, category }: { ti
     return (
         <>
             <Link href={link} target="_blank">
-                <div className="border-b border-zinc-700 flex flex-col md:flex-row gap-6 rounded-lg p-4 hover:bg-zinc-800 transition-all duration-300 cursor-pointer overflow-hidden">
+                <div className="border-b border-zinc-700 flex flex-col md:flex-row gap-6 hover:rounded-lg p-4 hover:bg-zinc-800 transition-all duration-300 cursor-pointer overflow-hidden">
                     <div className="w-full md:w-72 shrink-0">
                         <Image src={image ? image : "/images/work.jpg"} alt={title} width={500} height={500} className="w-full h-40 md:h-48 object-cover rounded-lg" />
                     </div>
@@ -19,8 +19,8 @@ export default function BlogCard({ title, content, image, link, category }: { ti
                         </div>
                         <div className="flex gap-4">
                             <p className="text-zinc-500 flex items-center gap-2"><span><CiCalendarDate size={20} /></span>11 April 2026</p>
-                            <p className="text-zinc-500 flex items-center gap-2"><span><CiRead size={20} /></span>1.2k Views</p>
-                            <p className="text-zinc-500 flex items-center gap-2"><span><IoMdTime size={20} /></span>2 mins read</p>
+                            <p className="text-zinc-500 flex items-center gap-2"><span><CiRead size={20} /></span>1.2k</p>
+                            <p className="text-zinc-500 flex items-center gap-2"><span><IoMdTime size={20} /></span>2 mins</p>
                         </div>
                     </div>
                 </div>

@@ -16,21 +16,21 @@ export default function page() {
             title: "Psychemasters - Mental Health Platform",
             description: "Psychemasters is an AI-powered mental health platform that provides online therapy and mental health resources to users.",
             image: "/images/work.jpg",
-            link: "https://psychemastersindia.in",
+            link: "https://psychemasterindia.in",
             category: "Experiences"
         },
         {
             title: "Dead Poets Society - A Movie Review",
             description: "Dead Poets Society is a 1989 American drama film directed by Peter Weir, starring Robin Williams as John Keating, an unconventional English teacher who inspires his students to 'seize the day'.",
             image: "/images/work.jpg",
-            link: "https://abhishekk.in",
+            link: "https://abhishekkr.in",
             category: "Cinema"
         },
         {
             title: "Walkthrough of AI with Anthropic's Claude 4.5",
             description: "Walkthrough of AI with Anthropic's Claude 4.5",
             image: "/images/work.jpg",
-            link: "https://abhishekk.in",
+            link: "https://abhishekkr.in",
             category: "AI/ML"
         },
     ]
@@ -55,7 +55,7 @@ export default function page() {
                 <p className="text-sm md:text-base flex gap-2 text-zinc-300 drop-shadow-2xl">
                     I write about technology, software development, cinema and my experiences as a developer & human being. Here are some of my recent posts.</p>
             </div>
-            <div className="my-10 flex gap-2 overflow-x-auto">
+            <div className="my-10 flex gap-2 flex-wrap justify-center md:w-fit md:bg-white/10 md:border md:border-zinc-700 rounded-lg p-2">
                 {categories.map((cat, i) => (
                     <button key={i} onClick={() => handleCategoryClick(cat.name)} className={`px-4 py-2 rounded-lg transition-all duration-300 cursor-pointer ${cat.name === activeCategory ? "bg-yellow-500 text-black hover:bg-yellow-600" : "bg-zinc-800 text-white hover:bg-zinc-700 hover:text-white"}`}>{cat.name}</button>
                 ))}
