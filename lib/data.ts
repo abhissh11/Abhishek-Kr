@@ -34,4 +34,32 @@ export const skills = [
     { name: "MCP", icon: "VscMcp" },
 
 
+
+]
+
+export const workData = [
+    {
+        title: "Calqus - AI-powered Learning",
+        description: "Calqus is an AI-powered learning platform that helps students learn new skills and concepts with ease.",
+        image: "/images/calqus.png",
+        link: "https://calqus.in"
+    },
+    {
+        title: "Psychemasters - Mental Health Platform",
+        description: "Psychemasters is an AI-powered mental health platform that provides online therapy and mental health resources to users.",
+        image: "/images/psychemaster.png",
+        link: "https://psychemastersindia.in"
+    },
+    {
+        title: "GoTribe - Events",
+        description: "GoTribe is an events platform where users can find and attend events happening around them.",
+        image: "/images/gotribe.png",
+        link: "https://github.com/abhissh11"
+    },
+    {
+        title: "MagicSlides - Presentation Maker",
+        description: "MagicSlides is an online presentation maker that helps you create beautiful and professional presentations with ease.",
+        image: "/images/gotribe.png",
+        link: "https://github.com/abhissh11"
+    },
 ]

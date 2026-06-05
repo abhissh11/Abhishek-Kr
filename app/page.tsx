@@ -6,8 +6,10 @@ import { IoLogoLinkedin } from "react-icons/io";
 import { IoLogoMedium, IoMail } from "react-icons/io5";
 import { LuArrowUpRight } from "react-icons/lu";
 import ExperienceCard from "./components/experience/ExperienceCard";
+import ProfileImage from "./components/profile/ProfileImage";
+import WorkCard from "./components/work/WorkCard";
 import { Marquee } from "@/components/ui/marquee";
-import { skills } from "@/lib/data";
+import { skills, workData } from "@/lib/data";
 import { TbBrandCss3, TbBrandGithubCopilot, TbBrandVscode } from "react-icons/tb";
 import { FaAws } from "react-icons/fa";
 import { VscMcp } from "react-icons/vsc";
@@ -27,23 +29,55 @@ const iconMap: Record<string, any> = {
   FaDocker, FaAws, FaGitAlt, SiGithubactions, TbBrandGithubCopilot, VscMcp, TbBrandVscode
 };
 
+const Tooltip = ({ text }: { text: string }) => (
+  <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 group-hover:-bottom-10 transition-all duration-300 bg-black text-white text-xs px-2 py-1 rounded-md whitespace-nowrap pointer-events-none border border-white/10 shadow-lg z-50">
+    {text}
+  </span>
+);
+
 export default function Home() {
   return (
     <main>
       {/* Landing section */}
       <section
-        className="flex flex-col md:flex-row min-h-screen w-full bg-cover bg-center bg-no-repeat bg-[url('/images/Hero-mobile.jpeg')] md:bg-[url('/images/Hero-ab.png')]"
+        className="flex flex-col md:flex-row items-center justify-center min-h-screen w-full"
       >
-        {/* Left half - empty to push content to the right */}
-        <div className="hidden md:block md:w-1/2"></div>
+        {/* Left half - containing the image */}
+        <div className="w-full md:w-1/2 flex items-center justify-center p-8 pt-32 md:pt-8">
+          <ProfileImage />
+        </div>
 
         {/* Right half - containing the text */}
-        <div className="w-full md:w-1/2 flex flex-col items-start justify-start pt-40 shrink-0 md:justify-center md:pt-8 p-8">
-          <div className="bg-black/40 md:bg-black/20 px-3 py-4 rounded-2xl">
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 drop-shadow-2xl"><span className="text-yellow-500">Building</span> things, <span className="text-yellow-500">Observing</span> life, <span className="text-yellow-500">Documenting</span> it all<span className="text-yellow-500">!</span></h1>
-            <p className="text-lg md:text-xl text-white drop-shadow-2xl">Software Engineer, Writer, and a forever Learner</p>
+        <div className="w-full md:w-1/2 flex flex-col items-center md:items-start justify-start pt-4 shrink-0 md:justify-center p-8 text-center md:text-left">
+          <div className="px-3 py-4">
+            <h1 className="text-3xl md:text-5xl font-bold text-left text-white mb-4 drop-shadow-2xl"><span className="text-yellow-500">Building</span> things,<br /><span className="text-yellow-500">Observing</span> life,<br /><span className="text-yellow-500">Documenting</span> it all<span className="text-yellow-500">!</span></h1>
+            <p className="text-lg md:text-lg text-white/80 text-left drop-shadow-2xl">Software Engineer, Writer & a Learner for life.</p>
+          </div>
+          {/* connect */}
+          <div className="flex flex-wrap gap-5 my-4 rounded-2xl justify-center items-center py-3 px-6 transition-all duration-300">
+            <Link href="https://linkedin.com/in/abhishekkr-dev" target="_blank" className="group relative flex items-center gap-2 text-white drop-shadow-2xl transition-all">
+              <IoLogoLinkedin size={24} />
+              <Tooltip text="LinkedIn" />
+            </Link>
+            <Link href="https://github.com/abhissh11" target="_blank" className="group relative flex items-center gap-2 text-white drop-shadow-2xl transition-all">
+              <FaGithub size={24} />
+              <Tooltip text="GitHub" />
+            </Link>
+            <Link href="https://medium.com/@dev.abhishekkr" target="_blank" className="group relative flex items-center gap-2 text-white drop-shadow-2xl transition-all">
+              <IoLogoMedium size={24} />
+              <Tooltip text="Medium" />
+            </Link>
+            <Link href="https://x.com/abhishekkr_ssh" target="_blank" className="group relative flex items-center gap-2 text-white drop-shadow-2xl transition-all">
+              <FaXTwitter size={24} />
+              <Tooltip text="Twitter" />
+            </Link>
+            <Link href="mailto:abhishekkr.ssh@gmail.com" target="_blank" className="group relative flex items-center gap-2 text-white drop-shadow-2xl transition-all">
+              <IoMail size={24} />
+              <Tooltip text="Email" />
+            </Link>
           </div>
         </div>
+
       </section>
       {/* about section */}
       <section className="flex flex-col items-start justify-center px-4 py-20 md:px-40 bg-zinc-900">
@@ -67,13 +101,8 @@ export default function Home() {
               );
             })}
           </Marquee>
-        </div>        <div className="flex flex-wrap gap-5 bg-white/10 my-4 rounded-2xl justify-center items-center py-3 px-6 hover:scale-105 transition-all duration-300">
-          <Link href="https://linkedin.com/in/abhishekkr-dev" target="_blank" className="flex items-center gap-2 text-white drop-shadow-2xl"><IoLogoLinkedin size={24} /> Linkedin</Link>
-          <Link href="https://github.com/abhissh11" target="_blank" className="flex items-center gap-2 text-white drop-shadow-2xl"><FaGithub size={24} /> Github</Link>
-          <Link href="https://medium.com/@dev.abhishekkr" target="_blank" className="flex items-center gap-2 text-white drop-shadow-2xl"><IoLogoMedium size={24} /> Medium</Link>
-          <Link href="https://x.com/abhishekkr_ssh" target="_blank" className="flex items-center gap-2 text-white drop-shadow-2xl"><FaXTwitter size={24} /> Twitter</Link>
-          <Link href="mailto:abhishekkr.ssh@gmail.com" target="_blank" className="flex items-center gap-2 text-white drop-shadow-2xl"><IoMail size={24} /> Mail</Link>
         </div>
+
       </section>
       {/* Experience section */}
       <section className="flex flex-col items-start justify-center px-4 py-20 md:px-40 bg-zinc-900">
@@ -85,6 +114,27 @@ export default function Home() {
         </div>
       </section>
       {/* Projects section */}
+      <section className="flex flex-col items-start justify-center px-4 py-20 md:px-40 bg-zinc-900">
+        <div className="flex flex-col md:flex-row justify-between w-full items-center mb-8">
+          <h1 className="text-xl font-serif md:text-3xl font-bold text-white drop-shadow-2xl">Work</h1>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+          {workData.slice(0, 2).map((w, i) => (
+            <WorkCard 
+              key={i}
+              title={w.title} 
+              description={w.description} 
+              image={w.image} 
+              link={w.link} 
+            />
+          ))}
+        </div>
+        <div className="w-full flex justify-center mt-12">
+          <Link href="/work" className="bg-yellow-500 hover:bg-yellow-400 text-zinc-900 font-semibold py-3 px-8 rounded-full transition-all duration-300 shadow-lg hover:shadow-yellow-500/20 hover:-translate-y-1">
+            See more
+          </Link>
+        </div>
+      </section>
       {/* Quote section  */}
       <section className="flex flex-col items-start justify-center px-4 py-20 md:px-40 bg-zinc-900">
         <div className="flex flex-col gap-4 items-center justify-center w-full py-4 bg-white/10 rounded-2xl p-4">
