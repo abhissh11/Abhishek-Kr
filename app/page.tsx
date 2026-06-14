@@ -1,14 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
-import { FaGithub, FaLocationArrow, FaQuoteRight } from "react-icons/fa";
+import { FaGithub, FaLocationArrow, FaQuoteRight, FaLock } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { IoLogoLinkedin } from "react-icons/io";
 import { IoLogoMedium, IoMail } from "react-icons/io5";
 import { LuArrowUpRight } from "react-icons/lu";
-import ExperienceCard from "./components/experience/ExperienceCard";
+import ExperienceCarousel from "@/components/experience/ExperienceCarousel";
 import ProfileImage from "./components/profile/ProfileImage";
 import WorkCard from "./components/work/WorkCard";
+import SkillsSection from "@/components/skills/SkillsSection";
 import { Marquee } from "@/components/ui/marquee";
+import { DotPattern } from "@/components/ui/dot-pattern";
 import { skills, workData } from "@/lib/data";
 import { TbBrandCss3, TbBrandGithubCopilot, TbBrandVscode } from "react-icons/tb";
 import { FaAws } from "react-icons/fa";
@@ -21,6 +23,7 @@ import {
 } from "react-icons/si";
 import { FaReact, FaNodeJs, FaDocker, FaGitAlt } from "react-icons/fa";
 import { BsDatabase } from "react-icons/bs";
+import { Folder, FolderCodeIcon } from "lucide-react";
 
 const iconMap: Record<string, any> = {
   SiJavascript, SiTypescript, SiPython, SiHtml5, TbBrandCss3, BsDatabase,
@@ -40,18 +43,19 @@ export default function Home() {
     <main>
       {/* Landing section */}
       <section
-        className="flex flex-col md:flex-row items-center justify-center min-h-screen w-full"
+        className="flex flex-col md:flex-row items-center justify-center min-h-screen w-full relative"
       >
+        <DotPattern />
         {/* Left half - containing the image */}
-        <div className="w-full md:w-1/2 flex items-center justify-center p-8 pt-32 md:pt-8">
+        <div className="w-full md:w-1/2 flex items-center justify-center p-8 pt-32 md:pt-8 relative z-10">
           <ProfileImage />
         </div>
 
         {/* Right half - containing the text */}
-        <div className="w-full md:w-1/2 flex flex-col items-center md:items-start justify-start pt-4 shrink-0 md:justify-center p-8 text-center md:text-left">
+        <div className="w-full md:w-1/2 flex flex-col items-center md:items-start justify-start pt-4 shrink-0 md:justify-center p-8 text-center md:text-left relative z-10">
           <div className="px-3 py-4">
-            <h1 className="text-3xl md:text-5xl font-bold text-left text-white mb-4 drop-shadow-2xl"><span className="text-yellow-500">Building</span> things,<br /><span className="text-yellow-500">Observing</span> life,<br /><span className="text-yellow-500">Documenting</span> it all<span className="text-yellow-500">!</span></h1>
-            <p className="text-lg md:text-lg text-white/80 text-left drop-shadow-2xl">Software Engineer, Writer & a Learner for life.</p>
+            <h1 className="text-3xl md:text-5xl font-bold text-left text-white mb-4 drop-shadow-2xl"><span className="text-orange-500">Building</span> things,<br /><span className="text-orange-500">Observing</span> life,<br /><span className="text-orange-500">Documenting</span> it all<span className="text-orange-500">!</span></h1>
+            <p className="text-lg md:text-lg text-white/80 text-left drop-shadow-2xl">Software Engineer, Writer by hobby & a Learner for life.</p>
           </div>
           {/* connect */}
           <div className="flex flex-wrap gap-5 my-4 rounded-2xl justify-center items-center py-3 px-6 transition-all duration-300">
@@ -80,44 +84,55 @@ export default function Home() {
 
       </section>
       {/* about section */}
-      <section className="flex flex-col items-start justify-center px-4 py-20 md:px-40 bg-zinc-900">
-        <h1 className="text-xl font-serif md:text-3xl font-bold text-white mb-4 drop-shadow-2xl">About</h1>
-        <div className="flex flex-col items-start justify-center max-w-[100%] bg-white/10 p-4 rounded-2xl">
-          <p className="text-md md:text-lg flex gap-2 text-white drop-shadow-2xl"><span><LuArrowUpRight size={24} className="text-yellow-500" /></span>
-            I build systems that don’t just work, but scale - turning ideas into real products, from social platforms to practical tools, while constantly refining my craft.</p>
-          <p className="text-md md:text-lg flex gap-2 text-white drop-shadow-2xl mt-4"><span><LuArrowUpRight size={24} className="text-yellow-500" /></span> At my core, I’m driven by curiosity—not only about technology, but about its influence on how people think, behave, and evolve. That curiosity takes me beyond writing code, pushing me to explore deeper meaning and purpose.</p>
-          <p className="text-md md:text-lg flex gap-2 text-white drop-shadow-2xl mt-4"><span><LuArrowUpRight size={24} className="text-yellow-500" /></span>I view growth not just as collecting skills or achievements, but as becoming more self-aware, disciplined, and intentional in what I pursue—something I’m consistently working to improve</p>
+      <section className="flex flex-col items-center justify-center px-4 py-20 md:px-40 bg-zinc-900 w-full">
+        <div className="w-full max-w-4xl rounded-2xl border border-white/10 bg-[#111111] shadow-2xl overflow-hidden">
+          {/* Header */}
+          <div className="flex items-center px-4 py-3 border-b border-white/10 bg-[#1a1a1a]">
+            <div className="flex gap-2">
+              <div className="w-3 h-3 rounded-full bg-red-500"></div>
+              <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+              <div className="w-3 h-3 rounded-full bg-green-500"></div>
+            </div>
+            <div className="flex-1 flex justify-center items-center">
+              <div className="flex items-center gap-2 text-xs text-white/40 bg-white/5 px-3 py-1 rounded-md">
+                <FaLock size={10} />
+                abhishekkr.dev/about
+              </div>
+            </div>
+            <div className="w-[44px]"></div>
+          </div>
+          
+          {/* Body */}
+          <div className="p-6 md:p-8">
+            <div className="flex flex-col md:flex-row gap-4 md:gap-6 bg-white/5 rounded-2xl p-6 border border-white/5">
+              <div className="flex-shrink-0 mt-1">
+                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#ffb47b] via-[#ff7a00] to-[#c24b00] shadow-[inset_-2px_-4px_6px_rgba(0,0,0,0.4),0_4px_10px_rgba(255,122,0,0.3)]"></div>
+              </div>
+              <div className="flex flex-col gap-4 text-white/80 leading-relaxed text-sm md:text-base">
+                <p>
+                  I build systems that don’t just work, but scale - <span className="text-orange-400 font-medium">turning ideas into real products</span>, from social platforms to practical tools, while constantly refining my craft.
+                </p>
+                <p>
+                  At my core, I’m driven by <span className="text-orange-400 font-medium">curiosity</span>—not only about technology, but about its influence on how people think, behave, and evolve. That curiosity takes me beyond writing code, pushing me to explore deeper meaning and purpose.
+                </p>
+                <p>
+                  I view growth not just as collecting skills or achievements, but as becoming more <span className="text-orange-400 font-medium">self-aware, disciplined, and intentional</span> in what I pursue—something I’m consistently working to improve.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
-        {/* Skills marquee  */}
-        <div className="w-full overflow-hidden mt-8 mb-4 max-w-full">
-          <Marquee pauseOnHover className="[--duration:45s]">
-            {skills.map((skill, i) => {
-              const Icon = iconMap[skill.icon];
-              return (
-                <div key={i} className="flex items-center gap-2 bg-white/10 px-6 py-2 rounded-2xl text-white hover:scale-105 transition-all duration-300">
-                  {Icon && <Icon size={24} />}
-                  <span className="text-lg font-medium">{skill.name}</span>
-                </div>
-              );
-            })}
-          </Marquee>
-        </div>
-
       </section>
       {/* Experience section */}
-      <section className="flex flex-col items-start justify-center px-4 py-20 md:px-40 bg-zinc-900">
-        <h1 className="text-xl font-serif md:text-3xl font-bold text-white mb-4 drop-shadow-2xl">Experience</h1>
-        <div className="flex flex-col gap-4 w-full py-4">
-          <ExperienceCard company="Wissenhive" role="Software Engineer" jobType="Full-time" duration="Jan 2026 - Present" description="" />
-          <ExperienceCard company="Yodha Foods" role="Fullstack Developer" jobType="Internship" duration="Oct 2025 - Dec 2025" description="" />
-          <ExperienceCard company="Psychemasters" role="Software Engineer" jobType="Contract" duration="Aug 2025 - Oct 2025" description="" />
-        </div>
-      </section>
+      <ExperienceCarousel />
+      <SkillsSection />
       {/* Projects section */}
       <section className="flex flex-col items-start justify-center px-4 py-20 md:px-40 bg-zinc-900">
-        <div className="flex flex-col md:flex-row justify-between w-full items-center mb-8">
-          <h1 className="text-xl font-serif md:text-3xl font-bold text-white drop-shadow-2xl">Work</h1>
-        </div>
+        
+          <div className="flex items-center gap-2 border border-white/10 rounded-full px-4 py-1 mb-6 bg-white/5">
+                    <FolderCodeIcon className="text-orange-500" size={14} />
+                    <span className="text-xs text-white/70 tracking-widest uppercase">Projects</span>
+                  </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
           {workData.slice(0, 2).map((w, i) => (
             <WorkCard 
@@ -130,7 +145,7 @@ export default function Home() {
           ))}
         </div>
         <div className="w-full flex justify-center mt-12">
-          <Link href="/work" className="bg-yellow-500 hover:bg-yellow-400 text-zinc-900 font-semibold py-3 px-8 rounded-full transition-all duration-300 shadow-lg hover:shadow-yellow-500/20 hover:-translate-y-1">
+          <Link href="/work" className="bg-orange-400 hover:bg-orange-500 text-zinc-900 font-semibold py-3 px-8 rounded-full transition-all duration-300 shadow-lg hover:shadow-orange-500/20 hover:-translate-y-1">
             See more
           </Link>
         </div>
@@ -138,7 +153,7 @@ export default function Home() {
       {/* Quote section  */}
       <section className="flex flex-col items-start justify-center px-4 py-20 md:px-40 bg-zinc-900">
         <div className="flex flex-col gap-4 items-center justify-center w-full py-4 bg-white/10 rounded-2xl p-4">
-          <FaQuoteRight size={44} className="text-yellow-500" />
+          <FaQuoteRight size={44} className="text-orange-400" />
           <p className="text-xl md:text-2xl font-serif flex gap-2 text-white drop-shadow-2xl text-center">
             "Building is about getting around the obstacles that are presented to you."</p>
           <p className="text-md md:text-lg text-white">– Jeremy Renner</p>

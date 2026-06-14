@@ -51,11 +51,11 @@ export default function page() {
     return (
         <main className="min-h-screen px-4 py-20 md:px-40 bg-zinc-900">
             <div className="my-10 flex flex-col items-start justify-center">
-                <h1 className=" text-xl font-serif md:text-2xl font-bold text-white mb-4 drop-shadow-2xl">Blogs :</h1>
-                <p className="text-sm md:text-base flex gap-2 text-zinc-300 drop-shadow-2xl">
+                <h1 className=" text-xl font-serif md:text-2xl font-bold text-white mb-4 drop-shadow-2xl">Blogs</h1>
+                <p className="text-base md:text-lg flex gap-2 text-zinc-300 drop-shadow-2xl">
                     I write about technology, software development, cinema and my experiences as a developer & human being. Here are some of my recent posts.</p>
             </div>
-            <div className="my-10 flex gap-2 flex-wrap justify-center md:w-fit md:bg-white/10 md:border md:border-zinc-700 rounded-lg p-2">
+            <div className="my-10 flex gap-2 flex-wrap justify-center items-center md:w-fit md:bg-white/10 md:border md:border-zinc-700 rounded-lg p-2">
                 {categories.map((cat, i) => (
                     <button key={i} onClick={() => handleCategoryClick(cat.name)} className={`px-4 py-2 rounded-lg transition-all duration-300 cursor-pointer ${cat.name === activeCategory ? "bg-yellow-500 text-black hover:bg-yellow-600" : "bg-zinc-800 text-white hover:bg-zinc-700 hover:text-white"}`}>{cat.name}</button>
                 ))}

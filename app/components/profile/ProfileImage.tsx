@@ -17,7 +17,7 @@ export default function ProfileImage() {
         alt="Abhishek"
         width={200}
         height={200}
-        className={`rounded-full shadow-2xl object-cover aspect-square max-w-[80%] md:max-w-md ring-2 ring-yellow-500 ring-offset-8 ring-offset-zinc-900 transition-opacity duration-500 ${
+        className={`rounded-full shadow-2xl object-cover aspect-square max-w-[80%] md:max-w-md ring-2 ring-orange-500 ring-offset-8 ring-offset-zinc-900 transition-opacity duration-500 ${
           isTapped ? 'opacity-0' : 'group-hover:opacity-0 opacity-100'
         }`}
         priority
