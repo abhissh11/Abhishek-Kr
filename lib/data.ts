@@ -73,47 +73,47 @@ export const workData = [
 ]
 
 export function calculateDuration(startDateStr: string, endDateStr: string): string {
-  const monthsMap: Record<string, number> = {
-    jan: 0, feb: 1, mar: 2, apr: 3, may: 4, jun: 5,
-    jul: 6, aug: 7, sep: 8, oct: 9, nov: 10, dec: 11
-  };
+    const monthsMap: Record<string, number> = {
+        jan: 0, feb: 1, mar: 2, apr: 3, may: 4, jun: 5,
+        jul: 6, aug: 7, sep: 8, oct: 9, nov: 10, dec: 11
+    };
 
-  const parseDate = (str: string) => {
-    if (!str || str.trim().toLowerCase() === "present") {
-      const now = new Date();
-      return { year: now.getFullYear(), month: now.getMonth() };
+    const parseDate = (str: string) => {
+        if (!str || str.trim().toLowerCase() === "present") {
+            const now = new Date();
+            return { year: now.getFullYear(), month: now.getMonth() };
+        }
+        const parts = str.trim().split(/\s+/);
+        const mStr = parts[0]?.substring(0, 3).toLowerCase();
+        const m = monthsMap[mStr] !== undefined ? monthsMap[mStr] : 0;
+        const y = parseInt(parts[1] || `${new Date().getFullYear()}`, 10);
+        return { year: y, month: m };
+    };
+
+    const start = parseDate(startDateStr);
+    const end = parseDate(endDateStr);
+
+    const totalMonths = (end.year - start.year) * 12 + (end.month - start.month) + 1;
+    const validMonths = Math.max(1, totalMonths);
+
+    if (validMonths < 12) {
+        return `${validMonths} mo${validMonths > 1 ? "s" : ""}`;
     }
-    const parts = str.trim().split(/\s+/);
-    const mStr = parts[0]?.substring(0, 3).toLowerCase();
-    const m = monthsMap[mStr] !== undefined ? monthsMap[mStr] : 0;
-    const y = parseInt(parts[1] || `${new Date().getFullYear()}`, 10);
-    return { year: y, month: m };
-  };
 
-  const start = parseDate(startDateStr);
-  const end = parseDate(endDateStr);
+    const yrs = Math.floor(validMonths / 12);
+    const mos = validMonths % 12;
 
-  const totalMonths = (end.year - start.year) * 12 + (end.month - start.month) + 1;
-  const validMonths = Math.max(1, totalMonths);
-
-  if (validMonths < 12) {
-    return `${validMonths} mo${validMonths > 1 ? "s" : ""}`;
-  }
-
-  const yrs = Math.floor(validMonths / 12);
-  const mos = validMonths % 12;
-
-  if (mos === 0) {
-    return `${yrs} yr${yrs > 1 ? "s" : ""}`;
-  }
-  return `${yrs} yr${yrs > 1 ? "s" : ""} ${mos} mo${mos > 1 ? "s" : ""}`;
+    if (mos === 0) {
+        return `${yrs} yr${yrs > 1 ? "s" : ""}`;
+    }
+    return `${yrs} yr${yrs > 1 ? "s" : ""} ${mos} mo${mos > 1 ? "s" : ""}`;
 }
 
 export function formatExperienceDate(startDateStr: string, endDateStr: string): string {
-  if (!startDateStr) return "";
-  const duration = calculateDuration(startDateStr, endDateStr);
-  const displayEnd = !endDateStr || endDateStr.trim().toLowerCase() === "present" ? "Present" : endDateStr;
-  return `${startDateStr} – ${displayEnd} · ${duration}`;
+    if (!startDateStr) return "";
+    const duration = calculateDuration(startDateStr, endDateStr);
+    const displayEnd = !endDateStr || endDateStr.trim().toLowerCase() === "present" ? "Present" : endDateStr;
+    return `${startDateStr} – ${displayEnd} · ${duration}`;
 }
 
 export const experiences = [
@@ -127,9 +127,9 @@ export const experiences = [
         logoImage: "/images/wissenhive.jpeg",
         logoBg: "bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500",
         logoIcon: "W",
-        description: "Delivered 20+ production LMS modules using Next.js, Express, and MongoDB. Hardened platform security with JWT auth, custom rate limiting, and RBAC. Architected an async notification system using BullMQ and Node.js workers processing 1M+ alerts without API latency. Established structured code review standards reducing post-release bugs by 10% and collaborated with QA to resolve defects 20% faster.",
+        description: "Delivered 20+ production LMS modules using Next.js, Express, and MongoDB. Hardened platform security with JWT auth, custom rate limiting, and RBAC. Architected an async notification system using BullMQ and Node.js workers processing 100K+ alerts without API latency. Established structured code review standards reducing post-release bugs by 10% and collaborated with QA to resolve defects 20% faster.",
         stats: [
-            { value: "1M+", label: "ALERTS PROCESSED" },
+            { value: "100K+", label: "ALERTS PROCESSED" },
             { value: "20+", label: "LMS MODULES SHIPPED" },
             { value: "20%", label: "DEFECT RESOLUTION SPEED" },
             { value: "99.9%", label: "SYSTEM UPTIME" }

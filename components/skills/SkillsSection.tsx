@@ -25,12 +25,14 @@ const Tooltip = ({ text }: { text: string }) => (
   </span>
 );
 
+import AnimatedSection from "@/components/ui/AnimatedSection";
+
 export default function SkillsSection() {
   return (
     <section className="flex flex-col items-center justify-center px-4 py-20 bg-zinc-900 w-full">
       <div className="w-full max-w-4xl flex flex-col md:flex-row items-start justify-center gap-10 md:gap-20 relative">
         {/* Left part */}
-        <div className="flex flex-col items-start w-full md:w-1/3 md:sticky md:top-28 self-start">
+        <AnimatedSection direction="up" delay={50} className="flex flex-col items-start w-full md:w-1/3 md:sticky md:top-28 self-start">
           <div className="flex items-center gap-2 border border-white/10 rounded-full px-4 py-1 mb-6 bg-white/5">
             <BsDatabase className="text-orange-500" size={14} />
             <span className="text-xs text-white/70 tracking-widest uppercase">Stack</span>
@@ -41,26 +43,28 @@ export default function SkillsSection() {
           <p className="text-md md:text-lg text-white/60 drop-shadow-2xl">
             The AI I build with, the tools I use to ship into products, and the foundation it all runs on.
           </p>
-        </div>
+        </AnimatedSection>
 
         {/* Right part */}
         <div className="flex flex-col gap-6 w-full md:w-2/3">
           {skillCategories.map((category, idx) => (
-            <div key={idx} className={`flex flex-col p-6 rounded-xl border border-dashed ${category.color} bg-black/20`}>
-              <h2 className="text-lg font-semibold text-white">{category.title}</h2>
-              <p className="text-sm text-white/50 mb-4">{category.description}</p>
-              <div className="flex flex-wrap gap-4">
-                {category.skills.map((skill, i) => {
-                  const Icon = iconMap[skill.icon];
-                  return (
-                    <div key={i} className="group relative flex items-center justify-center w-14 h-14 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 hover:border-white/30 transition-all duration-300 cursor-pointer">
-                      {Icon && <Icon size={28} className="text-white/80 group-hover:text-white transition-colors" />}
-                      <Tooltip text={skill.name} />
-                    </div>
-                  );
-                })}
+            <AnimatedSection key={idx} direction="up" delay={idx * 150} className="w-full">
+              <div className={`flex flex-col p-6 rounded-xl border border-dashed ${category.color} bg-black/20`}>
+                <h2 className="text-lg font-semibold text-white">{category.title}</h2>
+                <p className="text-sm text-white/50 mb-4">{category.description}</p>
+                <div className="flex flex-wrap gap-4">
+                  {category.skills.map((skill, i) => {
+                    const Icon = iconMap[skill.icon];
+                    return (
+                      <div key={i} className="group relative flex items-center justify-center w-14 h-14 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 hover:border-white/30 transition-all duration-300 cursor-pointer">
+                        {Icon && <Icon size={28} className="text-white/80 group-hover:text-white transition-colors" />}
+                        <Tooltip text={skill.name} />
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
-            </div>
+            </AnimatedSection>
           ))}
         </div>
       </div>

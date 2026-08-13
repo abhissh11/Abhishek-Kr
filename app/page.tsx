@@ -27,6 +27,8 @@ import { Folder, FolderCodeIcon } from "lucide-react";
 
 import ContactSection from "@/components/contact/ContactSection";
 
+import AnimatedSection from "@/components/ui/AnimatedSection";
+
 const iconMap: Record<string, any> = {
   SiJavascript, SiTypescript, SiPython, SiHtml5, TbBrandCss3, BsDatabase,
   FaReact, SiNextdotjs, FaNodeJs, SiExpress, SiFastapi, SiTailwindcss, SiShadcnui,
@@ -49,12 +51,12 @@ export default function Home() {
       >
         <DotPattern />
         {/* Left half - containing the image */}
-        <div className="w-full md:w-1/2 flex items-center justify-center p-8 pt-32 md:pt-8 relative z-10">
+        <AnimatedSection direction="right" delay={100} className="w-full md:w-1/2 flex items-center justify-center p-8 pt-32 md:pt-8 relative z-10">
           <ProfileImage />
-        </div>
+        </AnimatedSection>
 
         {/* Right half - containing the text */}
-        <div className="w-full md:w-1/2 flex flex-col items-center md:items-start justify-start pt-4 shrink-0 md:justify-center p-8 text-center md:text-left relative z-10">
+        <AnimatedSection direction="left" delay={200} className="w-full md:w-1/2 flex flex-col items-center md:items-start justify-start pt-4 shrink-0 md:justify-center p-8 text-center md:text-left relative z-10">
           <div className="px-3 py-4">
             <h1 className="text-3xl md:text-5xl font-bold text-left text-white mb-4 drop-shadow-2xl"><span className="text-orange-500">Building</span> products,<br /><span className="text-orange-500">Observing</span> life,<br /><span className="text-orange-500">Documenting</span> it all<span className="text-orange-500">!</span></h1>
             <p className="text-lg md:text-lg text-white/80 text-left drop-shadow-2xl">Software Engineer, Writer by hobby & a Learner for life.</p>
@@ -82,12 +84,12 @@ export default function Home() {
               <Tooltip text="Email" />
             </Link>
           </div>
-        </div>
+        </AnimatedSection>
 
       </section>
       {/* about section */}
       <section className="flex flex-col items-center justify-center px-4 py-20 md:px-40 bg-zinc-900 w-full">
-        <div className="w-full max-w-4xl rounded-2xl border border-white/10 bg-[#111111] overflow-hidden">
+        <AnimatedSection direction="up" delay={150} className="w-full max-w-4xl rounded-2xl border border-white/10 bg-[#111111] overflow-hidden">
           {/* Header */}
           <div className="flex items-center px-4 py-3 border-b border-white/10 bg-[#1a1a1a]">
             <div className="flex gap-2">
@@ -123,7 +125,7 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </div>
+        </AnimatedSection>
       </section>
       {/* Experience section */}
       <ExperienceCarousel />

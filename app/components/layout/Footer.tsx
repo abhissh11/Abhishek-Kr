@@ -7,7 +7,7 @@ export default function Footer() {
         <footer className="flex items-center justify-center px-4 py-8 md:px-40 bg-zinc-900">
             <div className="flex flex-col items-center justify-center">
 
-                <p className="text-md text-white mt-4">© {year} Abhishek Kumar. All rights reserved. | abhishekkr.ssh@gmail.com</p>
+                <p className="text-md text-white mt-4">© {year} Abhishek Kumar. All rights reserved.</p>
             </div>
         </footer>
     );

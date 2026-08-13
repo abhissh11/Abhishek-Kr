@@ -8,6 +8,8 @@ import { LuArrowUpRight } from "react-icons/lu";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { workData } from "@/lib/data";
 
+import AnimatedSection from "@/components/ui/AnimatedSection";
+
 export default function ProjectsSection() {
   const [activeIndex, setActiveIndex] = useState(0);
   const projects = workData.slice(0, 2);
@@ -24,7 +26,7 @@ export default function ProjectsSection() {
     <section className="flex flex-col items-center justify-center px-4 py-20 md:px-16 lg:px-40 bg-zinc-900 w-full overflow-hidden">
       <div className="w-full max-w-4xl flex flex-col items-start justify-center">
         {/* Section Header with Navigation Controls */}
-        <div className="w-full flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+        <AnimatedSection direction="up" delay={50} className="w-full flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
           <div className="flex flex-col items-start">
             <div className="flex items-center gap-2 border border-white/10 rounded-full px-4 py-1 mb-6 bg-white/5">
               <FolderCodeIcon className="text-orange-500" size={14} />
@@ -58,10 +60,10 @@ export default function ProjectsSection() {
               <FaChevronRight size={14} />
             </button>
           </div>
-        </div>
+        </AnimatedSection>
 
         {/* Horizontal Project Slider (No Card Background or Borders) */}
-        <div className="w-full overflow-hidden relative">
+        <AnimatedSection direction="up" delay={150} className="w-full overflow-hidden relative">
           <div
             className="flex transition-transform duration-500 ease-in-out w-full"
             style={{ transform: `translateX(-${activeIndex * 100}%)` }}
@@ -107,7 +109,7 @@ export default function ProjectsSection() {
               </div>
             ))}
           </div>
-        </div>
+        </AnimatedSection>
 
         {/* Bottom Row: Centered Pagination Dots */}
         <div className="w-full flex items-center justify-center mt-10">
