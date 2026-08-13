@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Sans_Condensed, Geist_Mono, Geist } from "next/font/google";
+import { IBM_Plex_Sans_Condensed, Geist_Mono, Geist, Tangerine } from "next/font/google";
 import "./globals.css";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
@@ -18,6 +18,12 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const tangerine = Tangerine({
+  variable: "--font-cursive",
+  weight: ["400", "700"],
+  subsets: ["latin"],
+});
+
 export const metadata: Metadata = {
   title: "Abhishek Kumar | Software Engineer",
   description: "Fullstack Developer, Writer, and Open Source Contributor",
@@ -31,7 +37,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cn("h-full", "antialiased", ibmPlexSansCondensed.variable, geistMono.variable, "font-sans", geist.variable)}
+      className={cn("h-full", "antialiased", ibmPlexSansCondensed.variable, geistMono.variable, tangerine.variable, "font-sans", geist.variable)}
     >
       <body className="min-h-full flex flex-col">
         <>

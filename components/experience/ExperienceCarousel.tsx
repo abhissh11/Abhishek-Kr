@@ -1,118 +1,101 @@
 "use client";
 
-import React, { useState } from "react";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import { BsCodeSlash } from "react-icons/bs";
+import React from "react";
+import Image from "next/image";
 import { MdOutlineWorkOutline } from "react-icons/md";
-
-const experiences = [
-  {
-    company: "Wissenhive",
-    role: "Software Engineer",
-    jobType: "Full-time",
-    duration: "Jan 2026 - Present",
-    description: "Focused on building reliable, scalable systems and intuitive interfaces. Successfully contributed to full-stack features, improved architectural performance, and collaborated across teams to deliver high-quality products."
-  },
-  {
-    company: "Yodha Foods",
-    role: "Fullstack Developer",
-    jobType: "Internship",
-    duration: "Oct 2025 - Dec 2025",
-    description: "Developed and maintained full-stack web applications, improving overall site performance and user experience. Worked closely with the design team to implement responsive UI components."
-  },
-  {
-    company: "Psychemasters",
-    role: "Software Engineer",
-    jobType: "Contract",
-    duration: "Aug 2025 - Oct 2025",
-    description: "Engineered robust backend services and integrated third-party APIs. Streamlined database queries and improved data loading times significantly."
-  }
-];
+import { experiences, formatExperienceDate } from "@/lib/data";
 
 export default function ExperienceCarousel() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const next = () => {
-    setCurrentIndex((prev) => (prev + 1) % experiences.length);
-  };
-
-  const prev = () => {
-    setCurrentIndex((prev) => (prev - 1 + experiences.length) % experiences.length);
-  };
-
   return (
-    <section className="flex flex-col items-center justify-center px-4 py-20 md:px-40 bg-zinc-900 w-full overflow-hidden">
-      <div className="w-full max-w-4xl flex justify-between items-center mb-8">
-        <div className="flex items-center gap-2 border border-white/10 rounded-full px-4 py-1 bg-white/5">
-          <MdOutlineWorkOutline className="text-orange-500" size={14} />
-          <span className="text-xs text-white/70 tracking-widest uppercase">Experience</span>
+    <section className="flex flex-col items-center justify-center px-4 py-20 md:px-16 lg:px-40 bg-zinc-900 w-full">
+      <div className="w-full max-w-4xl flex flex-col items-start justify-center">
+        {/* Section Header */}
+        <div className="flex flex-col items-start mb-12">
+          <div className="flex items-center gap-2 border border-white/10 rounded-full px-4 py-1 mb-6 bg-white/5">
+            <MdOutlineWorkOutline className="text-orange-500" size={14} />
+            <span className="text-xs text-white/70 tracking-widest uppercase">Experience</span>
+          </div>
+          <h1 className="text-3xl md:text-4xl font-bold text-white mb-4 drop-shadow-2xl leading-relaxed">
+            <span className="text-orange-500 font-cursive text-5xl md:text-6xl font-bold">Building</span> systems, <span className="text-orange-500 font-cursive text-5xl md:text-6xl font-bold">scaling</span> products, <br /> and <span className="text-orange-500 font-cursive text-5xl md:text-6xl font-bold">driving impact</span><span className="text-orange-500">.</span>
+          </h1>
+          <p className="text-base md:text-lg text-white/60 drop-shadow-2xl max-w-2xl">
+            My professional journey engineering full-stack platforms, optimizing backend architecture, and shipping software at scale.
+          </p>
         </div>
-        <div className="flex gap-4">
-          <button 
-            onClick={prev} 
-            className="p-3 rounded-full bg-white/5 border border-white/10 text-white/70 hover:text-orange-500 hover:bg-white/10 transition-colors cursor-pointer"
-            aria-label="Previous experience"
-          >
-            <FaChevronLeft size={14} />
-          </button>
-          <button 
-            onClick={next} 
-            className="p-3 rounded-full bg-white/5 border border-white/10 text-white/70 hover:text-orange-500 hover:bg-white/10 transition-colors cursor-pointer"
-            aria-label="Next experience"
-          >
-            <FaChevronRight size={14} />
-          </button>
-        </div>
-      </div>
 
-      <div className="w-full max-w-4xl overflow-hidden relative">
-        <div 
-          className="flex transition-transform duration-500 ease-in-out w-full"
-          style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-        >
+        {/* Experience Items List */}
+        <div className="w-full flex flex-col">
           {experiences.map((exp, idx) => (
-            <div key={idx} className="w-full shrink-0">
-              <div className="w-full bg-white/5 border border-white/20 rounded-3xl p-8 shadow-2xl">
-                <div className="flex justify-between items-start mb-6">
-                  <div className="flex flex-col gap-4">
-                    <h2 className="text-2xl font-bold text-white">{exp.company}</h2>
-                    <div className="flex items-center gap-3">
-                      <BsCodeSlash className="text-orange-500" size={22} />
-                      <span className="text-xl text-white font-medium">{exp.role}</span>
-                    </div>
-                    <div className="flex items-center gap-4 mt-2">
-                      <span className="px-4 py-1.5 bg-white/5 border border-white/10 text-white text-sm font-medium rounded-full">
-                        {exp.jobType}
-                      </span>
-                      <span className="text-white/40 text-sm">{exp.duration}</span>
-                    </div>
+            <div
+              key={idx}
+              className="flex flex-col p-6 md:p-8 bg-transparent border-2 border-transparent border-b-zinc-800/80 first:border-t-zinc-800/80 hover:rounded-2xl hover:bg-zinc-800/40 hover:border-zinc-700/60 transition-all duration-300 group"
+            >
+              {/* Header Row */}
+              <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 w-full">
+                {/* Left: Logo & Company/Date Info */}
+                <div className="flex items-start gap-4">
+                  {/* Company Logo Image or Fallback Badge */}
+                  <div
+                    className={`w-12 h-12 md:w-14 md:h-14 rounded-2xl overflow-hidden relative ${exp.logoBg || "bg-gradient-to-br from-orange-500 to-amber-600"} flex items-center justify-center text-white font-black text-xl md:text-2xl shadow-lg shrink-0 group-hover:scale-105 transition-transform duration-300`}
+                  >
+                    {exp.logoImage ? (
+                      <Image
+                        src={exp.logoImage}
+                        alt={exp.company}
+                        width={56}
+                        height={56}
+                        className="w-full h-full object-cover rounded-2xl"
+                      />
+                    ) : (
+                      exp.logoIcon || exp.company.charAt(0)
+                    )}
+                  </div>
+
+                  {/* Company Name & Duration */}
+                  <div className="flex flex-col">
+                    <h2 className="text-xl md:text-2xl font-bold text-white tracking-tight group-hover:text-orange-400 transition-colors">
+                      {exp.company}
+                    </h2>
+                    <span className="text-xs md:text-sm text-zinc-400 font-medium mt-0.5">
+                      {formatExperienceDate(exp.startDate, exp.endDate)}
+                    </span>
                   </div>
                 </div>
-                
-                <div className=" rounded-2xl p-6 border border-orange-500/20 border-dashed mt-6">
-                  <p className="text-white/80 leading-relaxed text-sm md:text-base">
-                    {exp.description}
-                  </p>
+
+                {/* Right: Role Tag Badge */}
+                <div className="self-start sm:self-auto">
+                  <span className="px-3.5 py-1.5 rounded-full bg-[#FF5733]/15 text-[#FF7043] border border-[#FF7043]/30 text-[10px] md:text-xs font-bold uppercase tracking-wider inline-block">
+                    {exp.roleTag || exp.role}
+                  </span>
                 </div>
               </div>
+
+              {/* Description Paragraph */}
+              <p className="text-zinc-300 text-sm md:text-[15px] leading-relaxed mt-4 mb-6 font-normal max-w-3xl">
+                {exp.description}
+              </p>
+
+              {/* Quantifiable Stats Row / Grid */}
+              {exp.stats && exp.stats.length > 0 && (
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 md:gap-8 pt-2">
+                  {exp.stats.map((stat, sIdx) => (
+                    <div key={sIdx} className="flex flex-col">
+                      <span className="text-2xl md:text-3xl font-extrabold text-white tracking-tight font-sans">
+                        {stat.value}
+                      </span>
+                      <span className="text-[10px] md:text-[11px] font-bold text-zinc-400 tracking-wider uppercase mt-1">
+                        {stat.label}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           ))}
         </div>
       </div>
-      
-      {/* Optional: pagination dots */}
-      <div className="flex justify-center gap-2 mt-8">
-        {experiences.map((_, idx) => (
-          <button
-            key={idx}
-            onClick={() => setCurrentIndex(idx)}
-            className={`w-2 h-2 rounded-full transition-all duration-300 ${
-              currentIndex === idx ? "bg-orange-500 w-6" : "bg-white/20"
-            }`}
-            aria-label={`Go to experience ${idx + 1}`}
-          />
-        ))}
-      </div>
     </section>
   );
 }
+
+

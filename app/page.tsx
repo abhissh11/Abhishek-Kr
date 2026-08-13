@@ -7,8 +7,8 @@ import { IoLogoMedium, IoMail } from "react-icons/io5";
 import { LuArrowUpRight } from "react-icons/lu";
 import ExperienceCarousel from "@/components/experience/ExperienceCarousel";
 import ProfileImage from "./components/profile/ProfileImage";
-import WorkCard from "./components/work/WorkCard";
 import SkillsSection from "@/components/skills/SkillsSection";
+import ProjectsSection from "@/components/projects/ProjectsSection";
 import { Marquee } from "@/components/ui/marquee";
 import { DotPattern } from "@/components/ui/dot-pattern";
 import { skills, workData } from "@/lib/data";
@@ -24,6 +24,8 @@ import {
 import { FaReact, FaNodeJs, FaDocker, FaGitAlt } from "react-icons/fa";
 import { BsDatabase } from "react-icons/bs";
 import { Folder, FolderCodeIcon } from "lucide-react";
+
+import ContactSection from "@/components/contact/ContactSection";
 
 const iconMap: Record<string, any> = {
   SiJavascript, SiTypescript, SiPython, SiHtml5, TbBrandCss3, BsDatabase,
@@ -54,7 +56,7 @@ export default function Home() {
         {/* Right half - containing the text */}
         <div className="w-full md:w-1/2 flex flex-col items-center md:items-start justify-start pt-4 shrink-0 md:justify-center p-8 text-center md:text-left relative z-10">
           <div className="px-3 py-4">
-            <h1 className="text-3xl md:text-5xl font-bold text-left text-white mb-4 drop-shadow-2xl"><span className="text-orange-500">Building</span> things,<br /><span className="text-orange-500">Observing</span> life,<br /><span className="text-orange-500">Documenting</span> it all<span className="text-orange-500">!</span></h1>
+            <h1 className="text-3xl md:text-5xl font-bold text-left text-white mb-4 drop-shadow-2xl"><span className="text-orange-500">Building</span> products,<br /><span className="text-orange-500">Observing</span> life,<br /><span className="text-orange-500">Documenting</span> it all<span className="text-orange-500">!</span></h1>
             <p className="text-lg md:text-lg text-white/80 text-left drop-shadow-2xl">Software Engineer, Writer by hobby & a Learner for life.</p>
           </div>
           {/* connect */}
@@ -85,7 +87,7 @@ export default function Home() {
       </section>
       {/* about section */}
       <section className="flex flex-col items-center justify-center px-4 py-20 md:px-40 bg-zinc-900 w-full">
-        <div className="w-full max-w-4xl rounded-2xl border border-white/10 bg-[#111111] shadow-2xl overflow-hidden">
+        <div className="w-full max-w-4xl rounded-2xl border border-white/10 bg-[#111111] overflow-hidden">
           {/* Header */}
           <div className="flex items-center px-4 py-3 border-b border-white/10 bg-[#1a1a1a]">
             <div className="flex gap-2">
@@ -101,7 +103,7 @@ export default function Home() {
             </div>
             <div className="w-[44px]"></div>
           </div>
-          
+
           {/* Body */}
           <div className="p-6 md:p-8">
             <div className="flex flex-col md:flex-row gap-4 md:gap-6 bg-white/5 rounded-2xl p-6 border border-white/5">
@@ -110,13 +112,13 @@ export default function Home() {
               </div>
               <div className="flex flex-col gap-4 text-white/80 leading-relaxed text-sm md:text-base">
                 <p>
-                  I build systems that don’t just work, but scale - <span className="text-orange-400 font-medium">turning ideas into real products</span>, from social platforms to practical tools, while constantly refining my craft.
+                  I build systems that don’t just work, but scale - <span className="text-orange-400 font-cursive text-2xl md:text-3xl font-bold">turning ideas into real products</span>, from social platforms to practical tools, while constantly refining my craft.
                 </p>
                 <p>
-                  At my core, I’m driven by <span className="text-orange-400 font-medium">curiosity</span>—not only about technology, but about its influence on how people think, behave, and evolve. That curiosity takes me beyond writing code, pushing me to explore deeper meaning and purpose.
+                  At my core, I’m driven by <span className="text-orange-400 font-cursive text-2xl md:text-3xl font-bold">curiosity</span>—not only about technology, but about its influence on how people think, behave, and evolve. That curiosity takes me beyond writing code, pushing me to explore deeper meaning and purpose.
                 </p>
                 <p>
-                  I view growth not just as collecting skills or achievements, but as becoming more <span className="text-orange-400 font-medium">self-aware, disciplined, and intentional</span> in what I pursue—something I’m consistently working to improve.
+                  I view growth not just as collecting skills or achievements, but as becoming more <span className="text-orange-400 font-cursive text-2xl md:text-3xl font-bold">self-aware, disciplined, and intentional</span> in what I pursue—something I’m consistently working to improve.
                 </p>
               </div>
             </div>
@@ -127,38 +129,9 @@ export default function Home() {
       <ExperienceCarousel />
       <SkillsSection />
       {/* Projects section */}
-      <section className="flex flex-col items-start justify-center px-4 py-20 md:px-40 bg-zinc-900">
-        
-          <div className="flex items-center gap-2 border border-white/10 rounded-full px-4 py-1 mb-6 bg-white/5">
-                    <FolderCodeIcon className="text-orange-500" size={14} />
-                    <span className="text-xs text-white/70 tracking-widest uppercase">Projects</span>
-                  </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
-          {workData.slice(0, 2).map((w, i) => (
-            <WorkCard 
-              key={i}
-              title={w.title} 
-              description={w.description} 
-              image={w.image} 
-              link={w.link} 
-            />
-          ))}
-        </div>
-        <div className="w-full flex justify-center mt-12">
-          <Link href="/work" className="bg-orange-400 hover:bg-orange-500 text-zinc-900 font-semibold py-3 px-8 rounded-full transition-all duration-300 shadow-lg hover:shadow-orange-500/20 hover:-translate-y-1">
-            See more
-          </Link>
-        </div>
-      </section>
-      {/* Quote section  */}
-      <section className="flex flex-col items-start justify-center px-4 py-20 md:px-40 bg-zinc-900">
-        <div className="flex flex-col gap-4 items-center justify-center w-full py-4 bg-white/10 rounded-2xl p-4">
-          <FaQuoteRight size={44} className="text-orange-400" />
-          <p className="text-xl md:text-2xl font-serif flex gap-2 text-white drop-shadow-2xl text-center">
-            "Building is about getting around the obstacles that are presented to you."</p>
-          <p className="text-md md:text-lg text-white">– Jeremy Renner</p>
-        </div>
-      </section>
+      <ProjectsSection />
+      {/* Contact section  */}
+      <ContactSection />
     </main>
   );
 }

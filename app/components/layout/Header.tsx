@@ -8,7 +8,7 @@ export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     return (
-        <header className="fixed top-0 left-0 right-0 z-50 bg-white/10 backdrop-blur-md text-white max-w-[90%] md:max-w-[75%] mx-auto my-6 px-4 md:px-6 py-2 hover:scale-[0.98] transition-all duration-300 rounded-2xl flex justify-between items-center drop-shadow-md">
+        <header className="fixed top-0 left-0 right-0 z-50 bg-white/10 backdrop-blur-md text-white w-[calc(100%-2rem)] max-w-4xl mx-auto my-6 px-4 md:px-6 py-2 transition-all duration-300 rounded-2xl flex justify-between items-center drop-shadow-md">
             {/* Left Side: Logo/Name */}
             <div className="text-xl md:text-2xl font-bold tracking-normal cursor-pointer hover:text-gray-200 transition-colors">
                 <Link href="/"><span className="font-serif">Abhishek.</span></Link>
