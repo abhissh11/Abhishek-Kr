@@ -4,8 +4,11 @@ import { workData } from "@/lib/data";
 
 export default function page() {
     return (
-        <main className="min-h-screen px-4 py-20 bg-zinc-900 flex flex-col items-center justify-center">
-            <div className="w-full max-w-4xl">
+        <main className="min-h-screen pt-28 md:pt-36 pb-16 md:pb-24 bg-zinc-900 flex flex-col items-center justify-center w-full">
+            <div className="w-[calc(100%-2rem)] max-w-5xl mx-auto">
+
+
+
                 <div className="my-10 flex flex-col items-start justify-center">
                     <h1 className=" text-xl font-serif md:text-2xl font-bold text-white mb-4 drop-shadow-2xl">Featured Work</h1>
                     <p className="text-base md:text-lg flex gap-2 text-zinc-300 drop-shadow-2xl">

@@ -12,8 +12,10 @@ export default function WorkCard({ title, description, image, link }: { title: s
                         src={image ? image : "/images/work.jpg"}
                         alt="Work"
                         fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         className="object-cover transition-transform duration-700 group-hover:scale-105"
                     />
+
                 </div>
 
                 <div className="flex flex-col p-5 gap-3">

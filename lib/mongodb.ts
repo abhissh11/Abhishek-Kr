@@ -1,47 +1,57 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
-const MONGODB_URI = process.env.MONGODB_URI!;
-
-if (!MONGODB_URI) {
-  throw new Error(
-    'Please define the MONGODB_URI environment variable inside .env.local'
-  );
+declare global {
+  // eslint-disable-next-line no-var
+  var mongooseCache: {
+    conn: typeof mongoose | null;
+    promise: Promise<typeof mongoose> | null;
+  } | undefined;
 }
 
-/**
- * Global is used here to maintain a cached connection across hot reloads
- * in development. This prevents connections growing exponentially
- * during API Route usage.
- */
-let cached = (global as any).mongoose;
+let cached = global.mongooseCache;
 
 if (!cached) {
-  cached = (global as any).mongoose = { conn: null, promise: null };
+  cached = global.mongooseCache = { conn: null, promise: null };
 }
 
-async function dbConnect() {
-  if (cached.conn) {
-    return cached.conn;
+export async function dbConnect() {
+  const MONGODB_URI = process.env.MONGODB_URI;
+
+  if (!MONGODB_URI) {
+    throw new Error(
+      "Please define the MONGODB_URI environment variable inside .env.local"
+    );
   }
 
-  if (!cached.promise) {
+  if (cached!.conn) {
+    return cached!.conn;
+  }
+
+  if (!cached!.promise) {
     const opts = {
       bufferCommands: false,
     };
 
-    cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
-      return mongoose;
+    cached!.promise = mongoose.connect(MONGODB_URI, opts).then((mongooseInstance) => {
+      console.log("MongoDB Connected Successfully");
+      return mongooseInstance;
+    }).catch((err) => {
+      console.error("MongoDB Connection Error:", err);
+      cached!.promise = null;
+      throw err;
     });
   }
-  
+
   try {
-    cached.conn = await cached.promise;
+    cached!.conn = await cached!.promise;
   } catch (e) {
-    cached.promise = null;
+    cached!.promise = null;
     throw e;
   }
 
-  return cached.conn;
+  return cached!.conn;
 }
 
+export const connectDB = dbConnect;
 export default dbConnect;
+

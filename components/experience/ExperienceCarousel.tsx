@@ -9,8 +9,11 @@ import AnimatedSection from "@/components/ui/AnimatedSection";
 
 export default function ExperienceCarousel() {
   return (
-    <section className="flex flex-col items-center justify-center px-4 py-20 md:px-16 lg:px-40 bg-zinc-900 w-full">
-      <div className="w-full max-w-4xl flex flex-col items-start justify-center">
+    <section className="flex flex-col items-center justify-center py-20 bg-zinc-900 w-full">
+      <div className="w-[calc(100%-2rem)] max-w-5xl mx-auto flex flex-col items-start justify-center">
+
+
+
         {/* Section Header */}
         <AnimatedSection direction="up" delay={50} className="flex flex-col items-start mb-12">
           <div className="flex items-center gap-2 border border-white/10 rounded-full px-4 py-1 mb-6 bg-white/5">
@@ -18,7 +21,7 @@ export default function ExperienceCarousel() {
             <span className="text-xs text-white/70 tracking-widest uppercase">Experience</span>
           </div>
           <h1 className="text-3xl md:text-4xl font-bold text-white mb-4 drop-shadow-2xl leading-relaxed">
-            <span className="text-orange-500 font-cursive text-5xl md:text-6xl font-bold">Building</span> systems, <span className="text-orange-500 font-cursive text-5xl md:text-6xl font-bold">scaling</span> products, and <span className="text-orange-500 font-cursive text-5xl md:text-6xl font-bold">driving impact</span><span className="text-orange-500">.</span>
+            <span className="text-orange-500 font-cursive font-cursive text-5xl md:text-6xl font-bold">Building</span> systems, <span className="text-orange-500 font-cursive text-5xl md:text-6xl font-bold">scaling</span> products, and <span className="text-orange-500 font-cursive text-5xl md:text-6xl font-bold">driving impact</span><span className="text-orange-500">.</span>
           </h1>
           <p className="text-base md:text-lg text-white/60 drop-shadow-2xl max-w-2xl">
             My professional journey engineering full-stack platforms, optimizing backend architecture, and shipping software at scale.
@@ -76,7 +79,7 @@ export default function ExperienceCarousel() {
                 </div>
 
                 {/* Description Paragraph */}
-                <p className="text-zinc-300 text-sm md:text-[15px] leading-relaxed mt-4 mb-6 font-normal max-w-3xl">
+                <p className="text-zinc-400 text-sm md:text-[15px] leading-relaxed mt-4 mb-6 font-normal max-w-3xl">
                   {exp.description}
                 </p>
 

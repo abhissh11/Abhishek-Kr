@@ -105,9 +105,12 @@ export default function ContactSection() {
   };
 
   return (
-    <section className="flex flex-col items-center justify-center px-4 py-20 bg-zinc-900 w-full relative overflow-hidden">
+    <section id="contact" className="flex flex-col items-center justify-center py-20 bg-zinc-900 w-full relative overflow-hidden">
       <DotPattern />
-      <div className="w-full max-w-4xl flex flex-col items-center gap-8 relative z-10">
+      <div className="w-[calc(100%-2rem)] max-w-5xl mx-auto flex flex-col items-center gap-8 relative z-10">
+
+
+
 
         {/* Top 3 Interactive Cards */}
         <AnimatedSection direction="up" delay={50} className="w-full">

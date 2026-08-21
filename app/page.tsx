@@ -47,49 +47,55 @@ export default function Home() {
     <main>
       {/* Landing section */}
       <section
-        className="flex flex-col md:flex-row items-center justify-center min-h-screen w-full relative"
+        className="flex flex-col items-center justify-center min-h-screen w-full relative"
       >
         <DotPattern />
-        {/* Left half - containing the image */}
-        <AnimatedSection direction="right" delay={100} className="w-full md:w-1/2 flex items-center justify-center p-8 pt-32 md:pt-8 relative z-10">
-          <ProfileImage />
-        </AnimatedSection>
+        <div className="w-[calc(100%-2rem)] max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8 relative z-10 pt-28 md:pt-16">
+          {/* Left half - containing the image */}
+          <AnimatedSection direction="right" delay={100} className="w-full md:w-auto flex items-center justify-center md:justify-start shrink-0 relative z-10">
+            <ProfileImage />
+          </AnimatedSection>
 
-        {/* Right half - containing the text */}
-        <AnimatedSection direction="left" delay={200} className="w-full md:w-1/2 flex flex-col items-center md:items-start justify-start pt-4 shrink-0 md:justify-center p-8 text-center md:text-left relative z-10">
-          <div className="px-3 py-4">
-            <h1 className="text-3xl md:text-5xl font-bold text-left text-white mb-4 drop-shadow-2xl"><span className="text-orange-500">Building</span> products,<br /><span className="text-orange-500">Observing</span> life,<br /><span className="text-orange-500">Documenting</span> it all<span className="text-orange-500">!</span></h1>
-            <p className="text-lg md:text-lg text-white/80 text-left drop-shadow-2xl">Software Engineer, Writer by hobby & a Learner for life.</p>
-          </div>
-          {/* connect */}
-          <div className="flex flex-wrap gap-5 my-4 rounded-2xl justify-center items-center py-3 px-6 transition-all duration-300">
-            <Link href="https://linkedin.com/in/abhishekkr-dev" target="_blank" className="group relative flex items-center gap-2 text-white drop-shadow-2xl transition-all">
-              <IoLogoLinkedin size={24} />
-              <Tooltip text="LinkedIn" />
-            </Link>
-            <Link href="https://github.com/abhissh11" target="_blank" className="group relative flex items-center gap-2 text-white drop-shadow-2xl transition-all">
-              <FaGithub size={24} />
-              <Tooltip text="GitHub" />
-            </Link>
-            <Link href="https://medium.com/@dev.abhishekkr" target="_blank" className="group relative flex items-center gap-2 text-white drop-shadow-2xl transition-all">
-              <IoLogoMedium size={24} />
-              <Tooltip text="Medium" />
-            </Link>
-            <Link href="https://x.com/abhishekkr_ssh" target="_blank" className="group relative flex items-center gap-2 text-white drop-shadow-2xl transition-all">
-              <FaXTwitter size={24} />
-              <Tooltip text="Twitter" />
-            </Link>
-            <Link href="mailto:abhishekkr.ssh@gmail.com" target="_blank" className="group relative flex items-center gap-2 text-white drop-shadow-2xl transition-all">
-              <IoMail size={24} />
-              <Tooltip text="Email" />
-            </Link>
-          </div>
-        </AnimatedSection>
-
+          {/* Right half - containing the text pushed to the rightmost boundary */}
+          <AnimatedSection direction="left" delay={200} className="w-full md:w-auto flex flex-col items-center md:items-end justify-center text-center md:text-left relative z-10">
+            <div className="flex flex-col items-center md:items-start">
+              <h1 className="text-3xl md:text-5xl font-bold text-left text-white mb-4 drop-shadow-2xl"><span className="text-orange-500">Building</span> products,<br /><span className="text-orange-500">Observing</span> life,<br /><span className="text-orange-500">Documenting</span> it all<span className="text-orange-500">!</span></h1>
+              <p className="text-lg md:text-lg text-white/80 text-left drop-shadow-2xl">Software Engineer, Writer by hobby & a Learner for life.</p>
+              {/* connect */}
+              <div className="flex flex-wrap gap-5 my-4 rounded-2xl justify-center md:justify-start items-center py-3 transition-all duration-300">
+                <Link href="https://linkedin.com/in/abhishekkr-dev" target="_blank" className="group relative flex items-center gap-2 text-white drop-shadow-2xl transition-all">
+                  <IoLogoLinkedin size={24} />
+                  <Tooltip text="LinkedIn" />
+                </Link>
+                <Link href="https://github.com/abhissh11" target="_blank" className="group relative flex items-center gap-2 text-white drop-shadow-2xl transition-all">
+                  <FaGithub size={24} />
+                  <Tooltip text="GitHub" />
+                </Link>
+                <Link href="https://medium.com/@dev.abhishekkr" target="_blank" className="group relative flex items-center gap-2 text-white drop-shadow-2xl transition-all">
+                  <IoLogoMedium size={24} />
+                  <Tooltip text="Medium" />
+                </Link>
+                <Link href="https://x.com/abhishekkr_ssh" target="_blank" className="group relative flex items-center gap-2 text-white drop-shadow-2xl transition-all">
+                  <FaXTwitter size={24} />
+                  <Tooltip text="Twitter" />
+                </Link>
+                <Link href="mailto:abhishekkr.ssh@gmail.com" target="_blank" className="group relative flex items-center gap-2 text-white drop-shadow-2xl transition-all">
+                  <IoMail size={24} />
+                  <Tooltip text="Email" />
+                </Link>
+              </div>
+            </div>
+          </AnimatedSection>
+        </div>
       </section>
+
+
+
       {/* about section */}
-      <section className="flex flex-col items-center justify-center px-4 py-20 md:px-40 bg-zinc-900 w-full">
-        <AnimatedSection direction="up" delay={150} className="w-full max-w-4xl rounded-2xl border border-white/10 bg-[#111111] overflow-hidden">
+      <section className="flex flex-col items-center justify-center py-20 bg-zinc-900 w-full">
+        <AnimatedSection direction="up" delay={150} className="w-[calc(100%-2rem)] max-w-5xl mx-auto rounded-2xl border border-white/10 bg-[#111111] overflow-hidden">
+
+
           {/* Header */}
           <div className="flex items-center px-4 py-3 border-b border-white/10 bg-[#1a1a1a]">
             <div className="flex gap-2">
@@ -114,13 +120,13 @@ export default function Home() {
               </div>
               <div className="flex flex-col gap-4 text-white/80 leading-relaxed text-sm md:text-base">
                 <p>
-                  I build systems that don’t just work, but scale - <span className="text-orange-400 font-cursive text-2xl md:text-3xl font-bold">turning ideas into real products</span>, from social platforms to practical tools, while constantly refining my craft.
+                  I build systems that don’t just work, but scale - <span className="text-orange-400 font-bold">turning ideas into real products</span>, from social platforms to practical tools, while constantly refining my craft.
                 </p>
                 <p>
-                  At my core, I’m driven by <span className="text-orange-400 font-cursive text-2xl md:text-3xl font-bold">curiosity</span>—not only about technology, but about its influence on how people think, behave, and evolve. That curiosity takes me beyond writing code, pushing me to explore deeper meaning and purpose.
+                  At my core, I’m driven by <span className="text-orange-400 font-bold">curiosity</span>—not only about technology, but about its influence on how people think, behave, and evolve. That curiosity takes me beyond writing code, pushing me to explore deeper meaning and purpose.
                 </p>
                 <p>
-                  I view growth not just as collecting skills or achievements, but as becoming more <span className="text-orange-400 font-cursive text-2xl md:text-3xl font-bold">self-aware, disciplined, and intentional</span> in what I pursue—something I’m consistently working to improve.
+                  I view growth not just as collecting skills or achievements, but as becoming more <span className="text-orange-400 font-bold">self-aware, disciplined, and intentional</span> in what I pursue—something I’m consistently working to improve.
                 </p>
               </div>
             </div>

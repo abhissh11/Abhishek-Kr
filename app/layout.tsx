@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import { cn } from "@/lib/utils";
+import { AuthProvider } from "@/context/AuthContext";
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
@@ -40,12 +41,13 @@ export default function RootLayout({
       className={cn("h-full", "antialiased", ibmPlexSansCondensed.variable, geistMono.variable, tangerine.variable, "font-sans", geist.variable)}
     >
       <body className="min-h-full flex flex-col">
-        <>
+        <AuthProvider>
           <Header />
           {children}
           <Footer />
-        </>
+        </AuthProvider>
       </body>
     </html>
   );
 }
+

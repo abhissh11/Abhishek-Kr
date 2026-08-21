@@ -23,8 +23,11 @@ export default function ProjectsSection() {
   };
 
   return (
-    <section className="flex flex-col items-center justify-center px-4 py-20 md:px-16 lg:px-40 bg-zinc-900 w-full overflow-hidden">
-      <div className="w-full max-w-4xl flex flex-col items-start justify-center">
+    <section className="flex flex-col items-center justify-center py-20 bg-zinc-900 w-full overflow-hidden">
+      <div className="w-[calc(100%-2rem)] max-w-5xl mx-auto flex flex-col items-start justify-center">
+
+
+
         {/* Section Header with Navigation Controls */}
         <AnimatedSection direction="up" delay={50} className="w-full flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
           <div className="flex flex-col items-start">
@@ -103,8 +106,10 @@ export default function ProjectsSection() {
                     src={w.image || "/images/work.jpg"}
                     alt={w.title}
                     fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
                     className="object-cover group-hover:scale-105 transition-transform duration-700"
                   />
+
                 </div>
               </div>
             ))}

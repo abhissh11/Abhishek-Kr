@@ -29,8 +29,11 @@ import AnimatedSection from "@/components/ui/AnimatedSection";
 
 export default function SkillsSection() {
   return (
-    <section className="flex flex-col items-center justify-center px-4 py-20 bg-zinc-900 w-full">
-      <div className="w-full max-w-4xl flex flex-col md:flex-row items-start justify-center gap-10 md:gap-20 relative">
+    <section className="flex flex-col items-center justify-center py-20 bg-zinc-900 w-full">
+      <div className="w-[calc(100%-2rem)] max-w-5xl mx-auto flex flex-col md:flex-row items-start justify-between gap-10 md:gap-20 relative">
+
+
+
         {/* Left part */}
         <AnimatedSection direction="up" delay={50} className="flex flex-col items-start w-full md:w-1/3 md:sticky md:top-28 self-start">
           <div className="flex items-center gap-2 border border-white/10 rounded-full px-4 py-1 mb-6 bg-white/5">

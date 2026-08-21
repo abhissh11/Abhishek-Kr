@@ -1,70 +1,80 @@
-"use client"
-import BlogCard from "@/app/components/blogs/BlogCard"
-import { useState } from "react"
+import React from "react";
+import type { Metadata } from "next";
+import dbConnect from "@/lib/mongodb";
+import Post from "@/models/Post";
+import Category from "@/models/Category";
+import BlogsClientView from "./BlogsClientView";
 
-export default function page() {
-    const [activeCategory, setActiveCategory] = useState("All")
-    const blogs = [
-        {
-            title: "Calqus - EdTech Platform",
-            description: "Calqus is an EdTech platform that provides online courses and educational resources to students along with AI-powered tools to enhance their learning experience.",
-            image: "/images/work.jpg",
-            link: "https://calqus.com",
-            category: "Technology"
-        },
-        {
-            title: "Psychemasters - Mental Health Platform",
-            description: "Psychemasters is an AI-powered mental health platform that provides online therapy and mental health resources to users.",
-            image: "/images/work.jpg",
-            link: "https://psychemasterindia.in",
-            category: "Experiences"
-        },
-        {
-            title: "Dead Poets Society - A Movie Review",
-            description: "Dead Poets Society is a 1989 American drama film directed by Peter Weir, starring Robin Williams as John Keating, an unconventional English teacher who inspires his students to 'seize the day'.",
-            image: "/images/work.jpg",
-            link: "https://abhishekkr.in",
-            category: "Cinema"
-        },
-        {
-            title: "Walkthrough of AI with Anthropic's Claude 4.5",
-            description: "Walkthrough of AI with Anthropic's Claude 4.5",
-            image: "/images/work.jpg",
-            link: "https://abhishekkr.in",
-            category: "AI/ML"
-        },
-    ]
+export const metadata: Metadata = {
+  title: "Technical Thoughts & Experiences | Abhishek Kumar",
+  description:
+    "Deep dives into software architecture, AI leverage, full-stack engineering, and personal insights by Abhishek Kumar.",
+  openGraph: {
+    title: "Technical Thoughts & Experiences | Abhishek Kumar",
+    description:
+      "Deep dives into software architecture, AI leverage, full-stack engineering, and personal insights by Abhishek Kumar.",
+    type: "website",
+  },
+};
 
-    const categories = [
-        { name: "All" },
-        { name: "Technology" },
-        { name: "AI/ML" },
-        { name: "Cinema" },
-        { name: "Experiences" },
-    ]
+interface PublicBlogsPageProps {
+  searchParams: Promise<{ page?: string; category?: string }>;
+}
 
-    const handleCategoryClick = (category: string) => {
-        setActiveCategory(category)
-    }
+export default async function PublicBlogsPage({
+  searchParams,
+}: PublicBlogsPageProps) {
+  const resolvedParams = await searchParams;
+  const activeCategory = resolvedParams.category || "All";
+  const currentPage = parseInt(resolvedParams.page || "1", 10) || 1;
+  const limit = 10;
 
+  await dbConnect();
 
-    return (
-        <main className="min-h-screen px-4 py-20 md:px-40 bg-zinc-900">
-            <div className="my-10 flex flex-col items-start justify-center">
-                <h1 className=" text-xl font-serif md:text-2xl font-bold text-white mb-4 drop-shadow-2xl">Blogs</h1>
-                <p className="text-base md:text-lg flex gap-2 text-zinc-300 drop-shadow-2xl">
-                    I write about technology, software development, cinema and my experiences as a developer & human being. Here are some of my recent posts.</p>
-            </div>
-            <div className="my-10 flex gap-2 flex-wrap justify-center items-center md:w-fit md:bg-white/10 md:border md:border-zinc-700 rounded-lg p-2">
-                {categories.map((cat, i) => (
-                    <button key={i} onClick={() => handleCategoryClick(cat.name)} className={`px-4 py-2 rounded-lg transition-all duration-300 cursor-pointer ${cat.name === activeCategory ? "bg-yellow-500 text-black hover:bg-yellow-600" : "bg-zinc-800 text-white hover:bg-zinc-700 hover:text-white"}`}>{cat.name}</button>
-                ))}
-            </div>
-            <div className="my-10 grid grid-cols-1 gap-4">
-                {blogs.filter((b) => b.category === activeCategory || activeCategory === "All").map((b, i) => (
-                    <BlogCard key={i} title={b.title} content={b.description} image={b.image} link={b.link} category={b.category} />
-                ))}
-            </div>
-        </main>
-    )
+  const rawCategories = await Category.find().sort({ name: 1 }).lean();
+  const categories = JSON.parse(JSON.stringify(rawCategories));
+
+  const query: any = { published: true };
+  if (activeCategory !== "All") {
+    query.category = activeCategory;
+  }
+
+  const skip = (currentPage - 1) * limit;
+  const totalPosts = await Post.countDocuments(query);
+  const totalPages = Math.ceil(totalPosts / limit) || 1;
+
+  const rawPosts = await Post.find(query)
+    .sort({ createdAt: -1 })
+    .skip(skip)
+    .limit(limit)
+    .lean();
+
+  const posts = JSON.parse(JSON.stringify(rawPosts));
+
+  const initialPostsData = {
+    success: true,
+    posts,
+    pagination: {
+      totalPosts,
+      totalPages,
+      currentPage,
+      limit,
+    },
+  };
+
+  const initialCategoriesData = {
+    success: true,
+    categories,
+  };
+
+  return (
+    <main className="w-full min-h-screen bg-zinc-900 text-neutral-100 pt-28 md:pt-36 pb-16 md:pb-24">
+      <BlogsClientView
+        initialPostsData={initialPostsData}
+        initialCategoriesData={initialCategoriesData}
+        initialCategory={activeCategory}
+        initialPage={currentPage}
+      />
+    </main>
+  );
 }
