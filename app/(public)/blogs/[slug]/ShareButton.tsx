@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import { Share2, Check } from "lucide-react";
-import { toast } from "react-toastify";
 
 export default function ShareButton() {
   const [copiedLink, setCopiedLink] = useState<boolean>(false);
@@ -12,13 +11,13 @@ export default function ShareButton() {
       if (typeof window !== "undefined") {
         await navigator.clipboard.writeText(window.location.href);
         setCopiedLink(true);
-        toast.success("Article link copied to clipboard!");
         setTimeout(() => setCopiedLink(false), 2500);
       }
     } catch {
-      toast.error("Failed to copy link.");
+      // fallback
     }
   };
+
 
   return (
     <button

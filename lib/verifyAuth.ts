@@ -19,11 +19,13 @@ export function verifyAuth(req: NextRequest): AdminPayload | null {
 
     const decoded = jwt.verify(token, JWT_SECRET) as AdminPayload;
 
-    if (process.env.ADMIN_EMAIL && decoded.email !== process.env.ADMIN_EMAIL) {
+    const adminEmail = (process.env.ADMIN_EMAIL || "abhishekkr.ssh@gmail.com").toLowerCase();
+    if (!decoded.email || decoded.email.toLowerCase() !== adminEmail) {
       return null;
     }
 
     return decoded;
+
   } catch {
     return null;
   }

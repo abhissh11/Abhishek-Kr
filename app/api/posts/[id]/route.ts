@@ -4,13 +4,16 @@ import dbConnect from "@/lib/mongodb";
 import Post from "@/models/Post";
 import { verifyAuth } from "@/lib/verifyAuth";
 
-
 export async function GET(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const { id } = await params;
+    if (!id) {
+      return NextResponse.json({ error: "Post ID or slug is required" }, { status: 400 });
+    }
+
     await dbConnect();
     const isId = mongoose.Types.ObjectId.isValid(id);
     const post = await Post.findOne(
@@ -29,7 +32,6 @@ export async function GET(
   }
 }
 
-
 export async function PUT(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -41,11 +43,23 @@ export async function PUT(
     }
 
     const { id } = await params;
-    await dbConnect();
-    const body = await req.json();
+    if (!id || !mongoose.Types.ObjectId.isValid(id)) {
+      return NextResponse.json({ error: "Invalid post ID format" }, { status: 400 });
+    }
 
-    const updatedPost = await Post.findByIdAndUpdate(id, body, {
-      new: true,
+    await dbConnect();
+    const body = await req.json().catch(() => ({}));
+    const { title, slug, category, content, published } = body;
+
+    const updateFields: any = {};
+    if (title !== undefined) updateFields.title = title;
+    if (slug !== undefined) updateFields.slug = slug;
+    if (category !== undefined) updateFields.category = category;
+    if (content !== undefined) updateFields.content = content;
+    if (published !== undefined) updateFields.published = published;
+
+    const updatedPost = await Post.findByIdAndUpdate(id, updateFields, {
+      returnDocument: "after",
       runValidators: true,
     });
 
@@ -73,6 +87,10 @@ export async function DELETE(
     }
 
     const { id } = await params;
+    if (!id || !mongoose.Types.ObjectId.isValid(id)) {
+      return NextResponse.json({ error: "Invalid post ID format" }, { status: 400 });
+    }
+
     await dbConnect();
 
     const deletedPost = await Post.findByIdAndDelete(id);

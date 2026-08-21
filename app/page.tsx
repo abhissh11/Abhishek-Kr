@@ -58,9 +58,9 @@ export default function Home() {
 
           {/* Right half - containing the text pushed to the rightmost boundary */}
           <AnimatedSection direction="left" delay={200} className="w-full md:w-auto flex flex-col items-center md:items-end justify-center text-center md:text-left relative z-10">
-            <div className="flex flex-col items-center md:items-start">
+            <div className="flex flex-col items-start md:items-start">
               <h1 className="text-3xl md:text-5xl font-bold text-left text-white mb-4 drop-shadow-2xl"><span className="text-orange-500">Building</span> products,<br /><span className="text-orange-500">Observing</span> life,<br /><span className="text-orange-500">Documenting</span> it all<span className="text-orange-500">!</span></h1>
-              <p className="text-lg md:text-lg text-white/80 text-left drop-shadow-2xl">Software Engineer, Writer by hobby & a Learner for life.</p>
+              <p className="text-lg md:text-lg text-white/80 text-left drop-shadow-2xl">Software Engineer, Writer by hobby & <span className="block md:hidden"><br /></span> a Learner for life.</p>
               {/* connect */}
               <div className="flex flex-wrap gap-5 my-4 rounded-2xl justify-center md:justify-start items-center py-3 transition-all duration-300">
                 <Link href="https://linkedin.com/in/abhishekkr-dev" target="_blank" className="group relative flex items-center gap-2 text-white drop-shadow-2xl transition-all">

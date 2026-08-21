@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import mongoose from "mongoose";
 import dbConnect from "@/lib/mongodb";
 import Category from "@/models/Category";
 import { verifyAuth } from "@/lib/verifyAuth";
@@ -14,8 +15,12 @@ export async function PUT(
     }
 
     const { id } = await params;
+    if (!id || !mongoose.Types.ObjectId.isValid(id)) {
+      return NextResponse.json({ error: "Invalid category ID format" }, { status: 400 });
+    }
+
     await dbConnect();
-    const body = await req.json();
+    const body = await req.json().catch(() => ({}));
     const { name, slug } = body;
 
     if (!name || !name.trim()) {
@@ -32,7 +37,7 @@ export async function PUT(
     const updatedCategory = await Category.findByIdAndUpdate(
       id,
       { name: name.trim(), slug: categorySlug },
-      { new: true, runValidators: true }
+      { returnDocument: "after", runValidators: true }
     );
 
     if (!updatedCategory) {
@@ -59,6 +64,10 @@ export async function DELETE(
     }
 
     const { id } = await params;
+    if (!id || !mongoose.Types.ObjectId.isValid(id)) {
+      return NextResponse.json({ error: "Invalid category ID format" }, { status: 400 });
+    }
+
     await dbConnect();
 
     const deletedCategory = await Category.findByIdAndDelete(id);

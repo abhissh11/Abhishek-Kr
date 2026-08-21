@@ -22,10 +22,10 @@ export async function POST(req: Request) {
     const projectCategory = optionTextMap[selectedOption] || selectedOption || "General Inquiry";
 
     // Send email via FormSubmit AJAX service directly to user's inbox
-    const targetEmail = process.env.CONTACT_EMAIL || "abhishekk.ssh@gmail.com";
+    const targetEmail = process.env.CONTACT_EMAIL || "abhishekkr.ssh@gmail.com";
     const reqReferer = req.headers.get("referer") || "http://localhost:3000";
     const reqOrigin = req.headers.get("origin") || "http://localhost:3000";
-    
+
     const response = await fetch(`https://formsubmit.co/ajax/${targetEmail}`, {
       method: "POST",
       headers: {

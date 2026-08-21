@@ -26,8 +26,8 @@ const AuthContext = createContext<AuthContextType>({
   authenticated: false,
   loading: true,
   login: async () => ({ success: false }),
-  logout: async () => {},
-  checkSession: async () => {},
+  logout: async () => { },
+  checkSession: async () => { },
 });
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
@@ -39,10 +39,16 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     try {
       setLoading(true);
       const res = await fetch("/api/auth/me", { cache: "no-store" });
-      const data = await res.json();
-      if (data.authenticated && data.user) {
-        setUser(data.user);
-        setAuthenticated(true);
+      const contentType = res.headers.get("content-type");
+      if (contentType && contentType.includes("application/json")) {
+        const data = await res.json();
+        if (data.authenticated && data.user) {
+          setUser(data.user);
+          setAuthenticated(true);
+        } else {
+          setUser(null);
+          setAuthenticated(false);
+        }
       } else {
         setUser(null);
         setAuthenticated(false);
@@ -64,6 +70,15 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     try {
       const result = await signInWithPopup(auth, googleProvider);
       const firebaseUser = result.user;
+
+      const allowedEmail = (process.env.NEXT_PUBLIC_ADMIN_EMAIL || "abhishekkr.ssh@gmail.com").toLowerCase();
+      if (firebaseUser.email && firebaseUser.email.toLowerCase() !== allowedEmail) {
+        await firebaseSignOut(auth);
+        const errorMsg = "Access Denied: You are not authorized to log into this portal.";
+        toast.error(errorMsg);
+        return { success: false, error: errorMsg };
+      }
+
       const idToken = await firebaseUser.getIdToken();
 
       const response = await fetch("/api/auth/google", {
@@ -72,7 +87,16 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         body: JSON.stringify({ idToken }),
       });
 
-      const data = await response.json();
+
+      let data: any = {};
+      const contentType = response.headers.get("content-type");
+      if (contentType && contentType.includes("application/json")) {
+        data = await response.json().catch(() => ({}));
+      } else {
+        const errorMsg = `Server error (${response.status}). Please check Vercel environment variables.`;
+        toast.error(errorMsg);
+        return { success: false, error: errorMsg };
+      }
 
       if (!response.ok) {
         const errorMsg = data.error || "Authentication failed.";
@@ -93,6 +117,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       return { success: false, error: errorMsg };
     }
   };
+
 
   const logout = async () => {
     try {
