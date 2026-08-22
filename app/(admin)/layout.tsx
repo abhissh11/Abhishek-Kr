@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
-import { LayoutDashboard, FileText, Tag, LogOut, ArrowLeft } from "lucide-react";
+import { LayoutDashboard, FileText, Tag, Inbox, LogOut, ArrowLeft } from "lucide-react";
 import Image from "next/image";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -21,6 +21,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       icon: LayoutDashboard,
     },
     {
+      name: "Connects",
+      href: "/admin/connects",
+      icon: Inbox,
+    },
+    {
       name: "Blogs",
       href: "/admin/blogs",
       icon: FileText,
@@ -31,6 +36,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       icon: Tag,
     },
   ];
+
 
 
   return (

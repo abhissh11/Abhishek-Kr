@@ -58,29 +58,67 @@ export default function ContactSection() {
 
     setIsSubmitting(true);
 
-    try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          selectedOption,
-          note,
-        }),
-      });
+    const optionTextMap: Record<string, string> = {
+      mvp: "Build an MVP",
+      improve: "Improve a product",
+      ai: "Explore AI",
+      something_else: "Something else",
+    };
+    const projectCategory = optionTextMap[selectedOption] || selectedOption || "General Inquiry";
+    const accessKey =
+      process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || "49621482-2e74-49bb-bd10-41aecb626e33";
 
-      if (res.ok) {
-        setSubmitted(true);
-        setTimeout(() => {
-          setSubmitted(false);
-          setEmail("");
-          setNote("");
-        }, 5000);
+    try {
+      // Concurrently dispatch email via Web3Forms client-side API and save to DB
+      const [web3Res, dbRes] = await Promise.allSettled([
+        fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            access_key: accessKey,
+            email: email,
+            from_name: "Portfolio Contact Form",
+            subject: `Portfolio Lead: ${projectCategory}`,
+            category: projectCategory,
+            selected_option: selectedOption,
+            message: note || "No note provided.",
+          }),
+        }),
+        fetch("/api/contact", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email,
+            selectedOption,
+            note,
+          }),
+        }),
+      ]);
+
+      if (web3Res.status === "fulfilled") {
+        const data = await web3Res.value.json().catch(() => ({}));
+        console.log("Web3Forms response:", data);
       } else {
-        setSubmitted(true);
+        console.warn("Web3Forms submission warning:", web3Res.reason);
       }
+
+      if (dbRes.status === "fulfilled") {
+        console.log("DB save response:", await dbRes.value.json().catch(() => ({})));
+      } else {
+        console.warn("DB save warning:", dbRes.reason);
+      }
+
+      setSubmitted(true);
+      setTimeout(() => {
+        setSubmitted(false);
+        setEmail("");
+        setNote("");
+      }, 5000);
     } catch (error) {
       console.error("Submission error:", error);
       setSubmitted(true);
