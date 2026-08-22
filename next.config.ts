@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  serverExternalPackages: ["firebase-admin", "firebase-admin/auth", "jwks-rsa", "jose"],
   images: {
     remotePatterns: [
       {

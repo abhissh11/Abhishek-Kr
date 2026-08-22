@@ -108,11 +108,11 @@ export default function Header() {
                     : "opacity-0 scale-95 invisible pointer-events-none"
                     }`}
             >
-                <ul className="flex flex-col space-y-3 text-center text-base font-medium text-neutral-300">
+                <ul className="flex flex-col space-y-3 text-left text-base font-medium text-neutral-300">
                     <li>
                         <Link
                             href="/"
-                            className="block hover:bg-neutral-800 p-2.5 rounded-xl transition-colors"
+                            className={`block p-2.5 rounded-xl transition-colors hover:bg-neutral-800 ${pathname === "/" ? "bg-neutral-800 text-white" : ""}`}
                             onClick={() => setIsMenuOpen(false)}
                         >
                             Home
@@ -121,7 +121,7 @@ export default function Header() {
                     <li>
                         <Link
                             href="/work"
-                            className="block hover:bg-neutral-800 p-2.5 rounded-xl transition-colors"
+                            className={`block p-2.5 rounded-xl transition-colors hover:bg-neutral-800 ${pathname === "/work" ? "bg-neutral-800 text-white" : ""}`}
                             onClick={() => setIsMenuOpen(false)}
                         >
                             Work
@@ -130,7 +130,7 @@ export default function Header() {
                     <li>
                         <Link
                             href="/blogs"
-                            className="block hover:bg-neutral-800 p-2.5 rounded-xl transition-colors"
+                            className={`block p-2.5 rounded-xl transition-colors hover:bg-neutral-800 ${pathname?.startsWith("/blogs") ? "bg-neutral-800 text-white" : ""}`}
                             onClick={() => setIsMenuOpen(false)}
                         >
                             Blogs

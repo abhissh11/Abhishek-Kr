@@ -1,26 +1,57 @@
-import WorkCard from "@/app/components/work/WorkCard";
-
 import { workData } from "@/lib/data";
+import type { Metadata } from "next";
+import WorkCard from "@/app/components/work/WorkCard";
+import TimelineLine from "@/app/components/work/TimelineLine";
+import AuthorCard from "@/components/author/AuthorCard";
+import AnimatedSection from "@/components/ui/AnimatedSection";
 
-export default function page() {
-    return (
-        <main className="min-h-screen pt-28 md:pt-36 pb-16 md:pb-24 bg-zinc-900 flex flex-col items-center justify-center w-full">
-            <div className="w-[calc(100%-2rem)] max-w-5xl mx-auto">
+export const metadata: Metadata = {
+  title: "Featured Work | Abhishek Kumar",
+  description:
+    "A selection of web applications, AI platforms, and software tools designed and engineered by Abhishek Kumar.",
+};
 
+export default function WorkPage() {
+  return (
+    <main className="min-h-screen pt-28 md:pt-36 pb-16 md:pb-24 bg-zinc-900 w-full">
+      <div className="w-[calc(100%-2rem)] max-w-5xl mx-auto">
 
+        {/* Page Header */}
+        <div className="mb-14 flex flex-col items-start gap-3">
+          <h1 className="text-3xl md:text-4xl font-bold text-white leading-tight">
+            <span className="text-orange-500 font-cursive text-5xl md:text-6xl">Featured work</span>{" "}
+            &amp; real-world applications<span className="text-orange-500">.</span>
+          </h1>
+          <p className="text-base md:text-lg text-white/60 max-w-2xl">
+            I build systems that don&apos;t just work, but scale — turning ideas into real products,
+            from Ed-tech platforms to Mental Health platforms, while constantly refining my craft.
+          </p>
+        </div>
 
-                <div className="my-10 flex flex-col items-start justify-center">
-                    <h1 className=" text-xl font-serif md:text-2xl font-bold text-white mb-4 drop-shadow-2xl">Featured Work</h1>
-                    <p className="text-base md:text-lg flex gap-2 text-zinc-300 drop-shadow-2xl">
-                        I build systems that don’t just work, but scale - turning ideas into real products, from Ed-tech Platforms, LMS-Platforms to Mental Health platforms, while constantly refining my craft. Showcasing some of my work below</p>
-                </div>
-                <div className="my-10 grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {workData.map((w, i) => (
-                        <WorkCard key={i} title={w.title} description={w.description} image={w.image} link={w.link} />
-                    ))}
-                </div>
-            </div>
-        </main>
-    )
+        {/* Timeline + Cards */}
+        <div className="relative flex flex-col gap-10">
+
+          {/* Scroll-driven orange progress line */}
+          <TimelineLine />
+
+          {workData.map((w, idx) => (
+            <WorkCard
+              key={idx}
+              index={idx}
+              title={w.title}
+              description={w.description}
+              image={w.image}
+              link={w.link}
+            />
+          ))}
+        </div>
+
+        {/* Author Card */}
+        <AnimatedSection direction="up" delay={100} className="mt-16">
+          <AuthorCard />
+        </AnimatedSection>
+
+      </div>
+    </main>
+  );
 }
-

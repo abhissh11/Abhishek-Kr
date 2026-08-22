@@ -61,18 +61,17 @@ export default function BlogsClientView({
       {/* Header Section */}
       <div className="space-y-4 mb-10 border-b border-zinc-800 pb-8">
         <h1 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight leading-tight max-w-4xl">
-          Sharing <span className="text-neutral-500">Technical thoughts </span> &amp; <span>Experiences.</span>
+          Sharing <span className="text-neutral-500">Technical thoughts </span> &amp; <span className="text-neutral-500">Experiences.</span>
         </h1>
 
         {/* Dynamic Category Pill Filters with SWR Caching */}
         <div className="flex items-center gap-2 flex-wrap pt-4">
           <button
             onClick={() => handleCategoryChange("All")}
-            className={`px-4 py-2 rounded-xl text-xs md:text-sm font-medium transition-all cursor-pointer ${
-              activeCategory === "All"
+            className={`px-4 py-2 rounded-xl text-xs md:text-sm font-medium transition-all cursor-pointer ${activeCategory === "All"
                 ? "bg-orange-500 text-zinc-950 font-semibold shadow-md shadow-orange-500/20"
                 : "bg-zinc-800/80 text-zinc-300 hover:bg-zinc-800 hover:text-white border border-zinc-700/50"
-            }`}
+              }`}
           >
             All
           </button>
@@ -82,11 +81,10 @@ export default function BlogsClientView({
               <button
                 key={cat._id}
                 onClick={() => handleCategoryChange(cat.name)}
-                className={`px-4 py-2 rounded-xl text-xs md:text-sm font-medium transition-all cursor-pointer ${
-                  isActive
+                className={`px-4 py-2 rounded-xl text-xs md:text-sm font-medium transition-all cursor-pointer ${isActive
                     ? "bg-orange-500 text-zinc-950 font-semibold shadow-md shadow-orange-500/20"
                     : "bg-zinc-800/80 text-zinc-300 hover:bg-zinc-800 hover:text-white border border-zinc-700/50"
-                }`}
+                  }`}
               >
                 {cat.name}
               </button>
@@ -97,9 +95,27 @@ export default function BlogsClientView({
 
       {/* Blog List Section */}
       {isLoading && posts.length === 0 ? (
-        <div className="flex flex-col items-center justify-center py-24 text-zinc-400 space-y-3">
-          <Loader2 className="w-8 h-8 animate-spin text-orange-500" />
-          <span className="text-sm font-medium">Loading articles...</span>
+        <div className="w-full space-y-0">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <div key={i} className="border-b border-zinc-800 py-8 first:pt-0">
+              <div className="flex items-start justify-between gap-6 w-full">
+                <div className="space-y-3 flex-1">
+                  <div className="h-3.5 w-20 bg-zinc-800 rounded animate-pulse" />
+                  <div className="h-7 w-4/5 bg-zinc-800 rounded-lg animate-pulse" />
+                  <div className="h-4 w-full bg-zinc-800/70 rounded animate-pulse" />
+                  <div className="h-4 w-3/4 bg-zinc-800/70 rounded animate-pulse" />
+                  <div className="flex items-center gap-3 pt-1">
+                    <div className="h-3 w-14 bg-zinc-800 rounded animate-pulse" />
+                    <div className="h-3 w-1 bg-zinc-800 rounded animate-pulse" />
+                    <div className="h-3 w-20 bg-zinc-800 rounded animate-pulse" />
+                  </div>
+                </div>
+                <div className="shrink-0 pt-1">
+                  <div className="w-6 h-6 rounded bg-zinc-800 animate-pulse" />
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       ) : posts.length === 0 ? (
         <div className="text-center py-24 space-y-4">
