@@ -31,5 +31,3 @@ export function getAdminAuth() {
 
   return getApps().length ? getAuth() : null;
 }
-
-export const adminAuth = getAdminAuth();
