@@ -1,4 +1,15 @@
 import mongoose from "mongoose";
+import dns from "dns";
+
+// Fix for local ISP/router DNS SRV query failures (querySrv EREFUSED)
+try {
+  dns.setDefaultResultOrder?.("ipv4first");
+  if (process.env.NODE_ENV !== "production") {
+    dns.setServers(["8.8.8.8", "1.1.1.1"]);
+  }
+} catch {
+  // Ignore if unsupported in environment
+}
 
 declare global {
   // eslint-disable-next-line no-var
